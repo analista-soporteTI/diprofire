@@ -1,0 +1,10 @@
+---
+import ArrowBack from "@icons/ArrowBack.astro"
+
+const { href, style } = Astro.props
+---
+
+<a href={href} class=`w-fit text-gray-600 hover:text-black flex gap-1 font-semibold ${style}`>
+  <ArrowBack class="size-4" />
+  <slot />
+</a>
