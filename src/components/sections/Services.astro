@@ -1,0 +1,79 @@
+---
+import ButtonPrimary from "@components/buttons/ButtonPrimary.astro";
+import ServiceCard from "../services/ServiceCard.astro";
+
+import ingenierias from "@assets/servicios/servicio ingenierias.svg";
+import instalacion from "@assets/servicios/servicio instalacion.svg";
+import suministros from "@assets/servicios/servicio suministros.svg";
+import tecnico from "@assets/servicios/servicio tecnico.svg";
+---
+
+<section class="py-24">
+  <div class="relative flex flex-col text-center gap-y-12">
+    <div class="max-w-[600px] mx-auto px-4">
+      <h2 class="text-3xl font-bold sm:text-4xl mb-4">
+        Conoce nuestros servicios especializados
+      </h2>
+      <p>
+        Descubre todo lo que ofrecemos para asegurar la eficiencia y seguridad
+        en tu proyecto. Desde estudios de factibilidad hasta sistemas avanzados
+        de detección.
+      </p>
+      <ButtonPrimary href="/servicios" style="mt-8 max-w-fit mx-auto">
+        Ver más detalles
+      </ButtonPrimary>
+    </div>
+
+    <div class="w-full px-4 flex flex-wrap gap-10 sm:gap-4">
+      <ServiceCard
+        src={ingenierias}
+        alt="Dibujo de plano de instalaciones con lapices, compas y regla"
+        style="max-w-[320px] text-start mx-auto"
+        title="Ingenierías"
+      >
+        <h3 class="my-2 font-bold text-xl">Ingenierías</h3>
+        <p>
+          Incluyen estudios de factibilidad, análisis de carga de fuego, diseño
+          y memorias de cálculo, así como ingeniería básica y de detalle para
+          garantizar la viabilidad y seguridad de sus proyectos.
+        </p>
+      </ServiceCard>
+      <ServiceCard
+        src={instalacion}
+        alt="Dibujo de un plano de instalaciones"
+        style="max-w-[320px] text-start mx-auto"
+      >
+        <h3 class="my-2 font-bold text-xl">Instalaciones</h3>
+        <p>
+          Abarcan el montaje de sistemas de detección y extinción, protección
+          pasiva, sistemas de almacenamiento e impulsión, así como protección de
+          vehículos, equipos móviles y cocinas.
+        </p>
+      </ServiceCard>
+      <ServiceCard
+        src={tecnico}
+        alt="Dibujo de un técnico con casco"
+        style="max-w-[320px] text-start mx-auto"
+      >
+        <h3 class="my-2 font-bold text-xl">Técnico</h3>
+        <p>
+          Incluye mantenimiento preventivo y correctivo, así como
+          capacitaciones, asegurando el óptimo funcionamiento y conocimiento de
+          sus sistemas.
+        </p>
+      </ServiceCard>
+      <ServiceCard
+        src={suministros}
+        alt="Dibujo de cajas de suministros de equipos"
+        style="max-w-[320px] text-start mx-auto"
+      >
+        <h3 class="my-2 font-bold text-xl">Suministros de equipos</h3>
+        <p>
+          Incluye extinción manual, extinción automática y detección de
+          incendios, garantizando soluciones eficientes para la protección
+          contra incendios.
+        </p>
+      </ServiceCard>
+    </div>
+  </div>
+</section>
