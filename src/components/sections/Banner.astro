@@ -1,0 +1,89 @@
+---
+import impulsión from "@assets/banners/almacenamiento e impulsión.png";
+import agenteLimpio from "@assets/banners/sistemas de agente limpio.png";
+import detección from "@assets/banners/sistema de detección de incendio.png";
+import protecciónPasiva from "@assets/banners/protección pasiva.png";
+import aniversary from "@assets/banners/Cumplimos 10 años.png";
+import { Image } from "astro:assets";
+---
+
+<section class="w-full h-fit overflow-hidden">
+  <swiper-container>
+    <div class="swiper swiper-banner max-h-[160px]">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide cursor-grab">
+          <Image
+            src={detección}
+            alt="banner"
+            class="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+        <div class="swiper-slide cursor-grab">
+          <Image
+            src={agenteLimpio}
+            alt="banner"
+            class="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+        <div class="swiper-slide cursor-grab">
+          <Image
+            src={protecciónPasiva}
+            alt="banner"
+            class="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+        <div class="swiper-slide cursor-grab">
+          <Image
+            src={impulsión}
+            alt="banner"
+            class="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+        <div class="swiper-slide cursor-grab">
+          <Image
+            src={aniversary}
+            alt="banner"
+            class="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div class="swiper-pagination"></div>
+
+      <div class="swiper-button-prev pt-14"></div>
+      <div class="swiper-button-next pt-14"></div>
+    </div>
+  </swiper-container>
+</section>
+
+<script>
+  import Swiper from "swiper";
+  import { Navigation, Pagination } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
+  import "swiper/css/pagination";
+
+  const swiperBanner = new Swiper(".swiper-banner", {
+    modules: [Navigation, Pagination],
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    loop: true,
+    spaceBetween: 0,
+    centeredSlides: true,
+  });
+</script>
