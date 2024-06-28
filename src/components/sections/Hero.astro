@@ -4,34 +4,43 @@ import ButtonSecondary from "@components/buttons/ButtonSecondary.astro";
 import video from "@assets/pictures/test-video.mp4";
 ---
 
-<section class="relative w-full bg-zinc-100 text-zinc-900 overflow-hidden">
+<section
+  class="relative w-full h-screen bg-zinc-100 text-zinc-900 overflow-hidden mb-20"
+>
   <div class="w-full h-screen relative overflow-hidden">
-    <video src={video} muted autoplay loop class="w-full h-full absolute object-cover aspect-video"></video>
+    <video
+      src={video}
+      muted
+      autoplay
+      loop
+      class="w-full h-full absolute object-cover aspect-video"></video>
   </div>
   <div class="w-screen h-screen bg-black/40 absolute top-0"></div>
 
-  <div class="w-full h-full absolute top-[8%]">
+  <div class="w-full h-full absolute top-[0%] grid place-content-center">
     <div
-      class="mx-auto max-w-screen-xl px-4 py-32 sm:py-40 pb-4 lg:flex lg:items-center"
+      class="w-fit h-fit max-w-3xl px-4 py-4 text-center flex flex-col justify-center items-center"
     >
-      <div class="mx-auto max-w-3xl text-center">
-        <h1
-          class="py-1 text-3xl font-extrabold sm:text-5xl text-zinc-100 sm:leading-tight"
-        >
-          Seguridad contra incendios.
-          <span class="sm:block">Protegemos lo que más valoras.</span>
-        </h1>
+      <h1
+        class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-zinc-100 sm:leading-tight"
+      >
+        Seguridad contra incendios.
+        <span class="block">Protegemos lo que más valoras.</span>
+      </h1>
 
-        <p class="mx-auto mt-4 max-w-xl sm:text-xl/relaxed text-zinc-100">
-          Una década siendo líderes en la industria de soluciones integrales de
-          seguridad contra incendios para proteger a tu personal, tus activos y
-          tu tranquilidad.
-        </p>
+      <p class="mt-10 max-w-xl sm:text-xl/relaxed text-zinc-100">
+        Una década siendo líderes en la industria de soluciones integrales de
+        seguridad contra incendios para proteger a tu personal, tus activos y tu
+        tranquilidad.
+      </p>
 
-        <div class="mt-8 flex flex-wrap justify-center gap-4">
-          <ButtonPrimary href="/productos">Productos</ButtonPrimary>
-          <ButtonSecondary href="/servicios">Servicios</ButtonSecondary>
-        </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <ButtonPrimary href="/productos" style="!px-12">
+          Productos
+        </ButtonPrimary>
+        <ButtonSecondary href="/servicios" style="border-none !text-green-500">
+          Servicios
+        </ButtonSecondary>
       </div>
     </div>
   </div>
