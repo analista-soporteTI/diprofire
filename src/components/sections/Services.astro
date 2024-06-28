@@ -1,6 +1,6 @@
 ---
-import ButtonPrimary from "@components/buttons/ButtonPrimary.astro";
 import ServiceCard from "../services/ServiceCard.astro";
+import ButtonSecondary from "@components/buttons/ButtonSecondary.astro";
 
 import ingenierias from "@assets/servicios/servicio ingenierias.svg";
 import instalacion from "@assets/servicios/servicio instalacion.svg";
@@ -8,24 +8,16 @@ import suministros from "@assets/servicios/servicio suministros.svg";
 import tecnico from "@assets/servicios/servicio tecnico.svg";
 ---
 
-<section class="py-24">
+<section class="mt-20">
   <div class="relative flex flex-col text-center gap-y-12">
-    <div class="max-w-[600px] mx-auto px-4">
-      <h2 class="text-3xl font-bold sm:text-4xl mb-4">
-        Conoce nuestros servicios especializados
-      </h2>
-      <p>
-        Descubre todo lo que ofrecemos para asegurar la eficiencia y seguridad
-        en tu proyecto. Desde estudios de factibilidad hasta sistemas avanzados
-        de detección.
-      </p>
-      <ButtonPrimary href="/servicios" style="mt-8 max-w-fit mx-auto">
-        Ver más detalles
-      </ButtonPrimary>
-    </div>
+    <h2 class="text-2xl sm:text-3xl font-bold mb-4 px-4 mx-auto max-w-[30ch] break-words">
+      <span class="text-green-600">Llevamos la seguridad</span> a tu proyecto con
+      nuestros servicios de
+    </h2>
 
-    <div class="w-full px-4 flex flex-wrap gap-10 sm:gap-4">
+    <div class="w-full max-w-[1400px] mx-auto px-4 flex flex-wrap gap-10 sm:gap-4">
       <ServiceCard
+        href="/servicios/#ingenierias"
         src={ingenierias}
         alt="Dibujo de plano de instalaciones con lapices, compas y regla"
         style="max-w-[320px] text-start mx-auto"
@@ -39,6 +31,7 @@ import tecnico from "@assets/servicios/servicio tecnico.svg";
         </p>
       </ServiceCard>
       <ServiceCard
+        href="/servicios/#instalación"
         src={instalacion}
         alt="Dibujo de un plano de instalaciones"
         style="max-w-[320px] text-start mx-auto"
@@ -51,6 +44,7 @@ import tecnico from "@assets/servicios/servicio tecnico.svg";
         </p>
       </ServiceCard>
       <ServiceCard
+        href="/servicios/#tecnico"
         src={tecnico}
         alt="Dibujo de un técnico con casco"
         style="max-w-[320px] text-start mx-auto"
@@ -63,6 +57,7 @@ import tecnico from "@assets/servicios/servicio tecnico.svg";
         </p>
       </ServiceCard>
       <ServiceCard
+        href="/servicios/#suministros"
         src={suministros}
         alt="Dibujo de cajas de suministros de equipos"
         style="max-w-[320px] text-start mx-auto"
@@ -75,5 +70,9 @@ import tecnico from "@assets/servicios/servicio tecnico.svg";
         </p>
       </ServiceCard>
     </div>
+
+    <ButtonSecondary href="/servicios" style="max-w-fit mx-auto">
+      Conocer más detalles
+    </ButtonSecondary>
   </div>
 </section>
