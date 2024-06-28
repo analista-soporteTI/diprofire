@@ -1,0 +1,61 @@
+---
+import picture1 from "@assets/pictures/diprofire-sesion-fotos.jpg";
+import picture2 from "@assets/pictures/diprofire-sesion-fotos-2.jpg";
+import picture3 from "@assets/pictures/stand-diprofire.jpg";
+import picture4 from "@assets/pictures/almacen.jpg";
+import picture5 from "@assets/pictures/parque-agpia.jpg";
+import { Image } from "astro:assets";
+---
+
+<div class="swiper slider-pictures relative">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <Image src={picture1} alt="Equipo Diprofire en sesión de fotos" loading="lazy" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={picture2} alt="Equipo Diprofire en sesión de fotos" loading="lazy" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={picture3} alt="Equipo Diprofire en sesión de fotos" loading="lazy" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={picture4} alt="Equipo Diprofire en sesión de fotos" loading="lazy" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={picture5} alt="Equipo Diprofire en sesión de fotos" loading="lazy" />
+    </div>
+  </div>
+</div>
+
+<style scoped>
+  .swiper {
+    width: 100%;
+    height: fit-content;
+    max-width: 600px;
+    margin: auto;
+    padding: 0 4rem;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 3/2;
+  }
+</style>
+
+<script>
+  import Swiper from "swiper";
+  import "swiper/swiper-bundle.css"
+
+  export function initSwiper() {
+    const swiper = new Swiper(".slider-pictures", {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      loop: true,
+    });
+  }
+
+  $: initSwiper();
+</script>
