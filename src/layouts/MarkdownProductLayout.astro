@@ -1,0 +1,76 @@
+---
+import MainPageLayout from "@layouts/MainLayout.astro";
+import { Aside } from "@components/products/Aside.jsx"
+import ButtonPrimary from "@components/buttons/ButtonPrimary.astro";
+import ButtonSecondary from "@components/buttons/ButtonSecondary.astro";
+import { Quantity } from "@components/products/Quantity.jsx"
+import ButtonBack from "@components/buttons/ButtonBack.astro";
+const { frontmatter } = Astro.props;
+
+let quantity = 1;
+let breakLine = "%0D%0A";
+
+const mail = "diprofire@diprofire.cl";
+const subject = "Cotización web";
+
+const body = `Quisiera%20cotizar%20${quantity}%20de%20sus%20productos:%20${frontmatter.title}.${breakLine}${breakLine}Descripci%C3%B3n%3A%20${frontmatter.description}${breakLine}C%C3%B3digo%2FNP%3A%20${frontmatter.codigoNp}`;
+
+let mailto = `mailto:${mail} ?subject=${subject}&body=${body}`;
+---
+
+<MainPageLayout
+  title={frontmatter.title + " | Productos Diprofire"}
+  description="Nuestros productos"
+>
+  <div class="flex gap-10">
+    <Aside />
+    <main class="px-4 sm:px-10 pt-24 pb-10 w-full max-w-5xl z-10">
+      <div>
+        <ButtonBack href="/productos" style="mb-4">Volver a productos</ButtonBack>
+        <div class="flex flex-wrap items-center gap-4 my-4">
+          <p class="font-medium">Categorias:</p>
+          <div class="text-sm flex flex-wrap gap-2">
+            {
+              frontmatter.tags.map((tag: string) => (
+                <a
+                  href={`/categorias/${tag}`}
+                  class="px-2 border border-gray-300 hover:bg-black/5 rounded-md py-1"
+                >
+                  {tag}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+        <div class="flex flex-col xl:flex-row xl:items-center gap-6">
+          <img
+            src={frontmatter.image.url}
+            class="w-full max-w-[300px] aspect-square object-contain"
+            alt={frontmatter.image.alt}
+          />
+          <div>
+            <h1 class="font-bold text-3xl pb-4">{frontmatter.title}</h1>
+            <p class="mb-6 sm:mb-10">{frontmatter.description}</p>
+            <div class="mb-10 flex flex-wrap gap-4">
+              <Quantity initialValue={quantity} client:load/>
+              <div class="flex gap-2 sm:gap-4">
+                <ButtonPrimary href={mailto} style="xl:ml-5 text-sm sm:text-base px-10 sm:px-14">Cotizar</ButtonPrimary>
+                <ButtonSecondary href="/" style="ml-0 text-sm sm:text-base">Agregar al carrito</ButtonSecondary>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="pb-2 pt-4 text-2xl font-semibold">Descripción</h2>
+        <p>{frontmatter.descriptionLarge}</p>
+      </div>
+      <div>
+        <h2 class="pb-2 pt-4 text-2xl font-semibold">Información adicional</h2>
+        <p>Código/NP: {frontmatter.codigoNp}</p>
+        <p>Marca: {frontmatter.marca}</p>
+        <p>Modelo: {frontmatter.modelo}</p>
+      </div>
+    </main>
+  </div>
+</MainPageLayout>
