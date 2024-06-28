@@ -1,0 +1,46 @@
+---
+import '@fontsource/lato';
+import Navbar from "@components/Navbar.astro";
+import { ViewTransitions } from "astro:transitions";
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.jpg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<ViewTransitions />
+	</head>
+	<body class="bg-zinc-100 text-zinc-900">
+		<Navbar />
+		<slot />
+	</body>
+</html>
+<style is:global>
+	body {
+		font-family: "Lato", "Inter Variable", sans-serif;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		text-wrap: balance;
+	}
+	
+	p, a, li, span {
+		text-wrap: pretty;
+	}
+	.bg-section-clip {
+		clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+	}
+</style>
