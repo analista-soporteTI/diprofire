@@ -11,7 +11,7 @@ import { Image } from "astro:assets";
   <swiper-container>
     <div class="swiper swiper-banner max-h-[160px]">
       <div class="swiper-wrapper">
-        <div class="swiper-slide cursor-grab">
+        <div class="swiper-slide">
           <Image
             src={detección}
             alt="banner"
@@ -19,7 +19,7 @@ import { Image } from "astro:assets";
             loading="lazy"
           />
         </div>
-        <div class="swiper-slide cursor-grab">
+        <div class="swiper-slide">
           <Image
             src={agenteLimpio}
             alt="banner"
@@ -27,7 +27,7 @@ import { Image } from "astro:assets";
             loading="lazy"
           />
         </div>
-        <div class="swiper-slide cursor-grab">
+        <div class="swiper-slide">
           <Image
             src={protecciónPasiva}
             alt="banner"
@@ -35,7 +35,7 @@ import { Image } from "astro:assets";
             loading="lazy"
           />
         </div>
-        <div class="swiper-slide cursor-grab">
+        <div class="swiper-slide">
           <Image
             src={impulsión}
             alt="banner"
@@ -43,7 +43,7 @@ import { Image } from "astro:assets";
             loading="lazy"
           />
         </div>
-        <div class="swiper-slide cursor-grab">
+        <div class="swiper-slide">
           <Image
             src={aniversary}
             alt="banner"
@@ -85,5 +85,6 @@ import { Image } from "astro:assets";
     loop: true,
     spaceBetween: 0,
     centeredSlides: true,
+    grabCursor: true,
   });
 </script>
