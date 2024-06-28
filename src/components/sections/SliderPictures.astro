@@ -1,28 +1,34 @@
 ---
-import picture1 from "@assets/pictures/diprofire-sesion-fotos.jpg";
-import picture2 from "@assets/pictures/diprofire-sesion-fotos-2.jpg";
-import picture3 from "@assets/pictures/stand-diprofire.jpg";
-import picture4 from "@assets/pictures/almacen.jpg";
-import picture5 from "@assets/pictures/parque-agpia.jpg";
+import picture1 from "@assets/pictures/diprofire-sesion-fotos-1.webp";
+import picture2 from "@assets/pictures/diprofire-sesion-fotos-2.webp";
+import picture3 from "@assets/pictures/capacitacion.webp";
+import picture4 from "@assets/pictures/presentacion.webp";
+import picture5 from "@assets/pictures/almacen.webp";
 import { Image } from "astro:assets";
+
+const imgAlt1 = "Equipo Diprofire posando frente a las oficinas, con dos camionetas de la empresa estacionadas a ambos lados.";
+const imgAlt2 = "Equipo Diprofire posando frente a una pared gris, algunos de pie y otros agachados. Un miembro del equipo sostiene una bandera de Chile.";
+const imgAlt3 = "Reunion de equipo Diprofire para capacitación. Todos los miembros están sentados en sillas plegables, escuchando a un expositor.";
+const imgAlt4 = "Sala de reuniones en la oficina con miembros de Diprofire sentados anotando y viendo los avances de un proyecto.";
+const imgAlt5 = "Dos miembros del equipo Diprofire organizando cajas de Protectowire en un almacén. Uno de ellos está tomando una caja de la estantería mientras el otro sostiene una tabla con un portapapeles.";
 ---
 
 <div class="swiper slider-pictures relative">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <Image src={picture1} alt="Equipo Diprofire en sesión de fotos" loading="lazy" />
+      <Image src={picture1} alt={imgAlt1} loading="eager" />
     </div>
     <div class="swiper-slide">
-      <Image src={picture2} alt="Equipo Diprofire en sesión de fotos" loading="lazy" />
+      <Image src={picture2} alt={imgAlt2} loading="lazy" />
     </div>
     <div class="swiper-slide">
-      <Image src={picture3} alt="Equipo Diprofire en sesión de fotos" loading="lazy" />
+      <Image src={picture3} alt={imgAlt3} loading="lazy" />
     </div>
     <div class="swiper-slide">
-      <Image src={picture4} alt="Equipo Diprofire en sesión de fotos" loading="lazy" />
+      <Image src={picture4} alt={imgAlt4} loading="lazy" />
     </div>
     <div class="swiper-slide">
-      <Image src={picture5} alt="Equipo Diprofire en sesión de fotos" loading="lazy" />
+      <Image src={picture5} alt={imgAlt5} loading="lazy" />
     </div>
   </div>
 </div>
@@ -57,5 +63,5 @@ import { Image } from "astro:assets";
     });
   }
 
-  $: initSwiper();
+  initSwiper();
 </script>
