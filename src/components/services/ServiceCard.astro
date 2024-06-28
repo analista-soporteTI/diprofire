@@ -11,6 +11,7 @@ const { src, alt, style, href } = Astro.props;
       src={src}
       alt={alt}
       class="w-full max-w-[240px] object-cover mx-auto"
+      loading="lazy"
     />
     <slot />
   </a>
