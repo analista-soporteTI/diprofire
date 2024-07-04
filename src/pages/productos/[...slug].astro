@@ -1,0 +1,11 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import { DetailProductLayout } from "@layouts/DetailProductLayout.jsx";
+export const prerender = false;
+
+const { slug } = Astro.params;
+---
+
+<MainLayout title="Producto" description="Descripción del producto">
+  <DetailProductLayout slug={slug} client:only />
+</MainLayout>
