@@ -1,0 +1,11 @@
+---
+import { GalleryProducts } from "@components/products/GalleryProducts.jsx";
+import MainLayout from "@layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="Diprofire - Productos"
+  description="Productos de seguridad y protección contra incendios."
+>
+  <GalleryProducts client:only />
+</MainLayout>
