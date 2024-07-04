@@ -1,7 +1,6 @@
 ---
 import '@fontsource/lato';
-import Navbar from "@components/Navbar.astro";
-import { ViewTransitions } from "astro:transitions";
+import { Navbar } from "@components/Navbar.jsx";
 
 interface Props {
 	title: string;
@@ -21,10 +20,9 @@ const { title, description } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<ViewTransitions />
 	</head>
 	<body class="bg-zinc-100 text-zinc-900">
-		<Navbar />
+		<Navbar client:only />
 		<slot />
 	</body>
 </html>
