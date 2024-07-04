@@ -78,15 +78,17 @@ import brandVictaulic from "@assets/brands/victaulic.png";
   .company-logo img {
     height: 100%;
     width: auto;
+    max-width: 180px;
+    max-height: 100px;
     object-fit: contain;
     aspect-ratio: auto 100 / 100;
   }
 
   @keyframes company-logo-slide {
-    0% {
+    100% {
       transform: translateX(0);
     }
-    100% {
+    0% {
       transform: translateX(calc(-100% - 4rem));
     }
   }
