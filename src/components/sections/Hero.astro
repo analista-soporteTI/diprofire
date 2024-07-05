@@ -1,5 +1,6 @@
 ---
-import video from "@assets/video diprofire.mp4";
+import video from "@assets/video diprofire.webm";
+import video2 from "@assets/video diprofire.mp4";
 ---
 
 <section
@@ -12,7 +13,9 @@ import video from "@assets/video diprofire.mp4";
       autoplay
       loop
       preload="auto"
-      class="w-full h-full absolute object-cover aspect-video"></video>
+      class="w-full h-full absolute object-cover aspect-video">
+      <source src={video2} type="video/mp4" />
+    </video>
   </div>
   <div class="w-screen h-screen bg-black/15 absolute top-0"></div>
 </section>
