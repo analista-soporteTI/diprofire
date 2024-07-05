@@ -1,10 +1,9 @@
 import { LoaderCard } from '@components/status/LoaderCard'
 import { CardProduct } from '@components/products/CardProduct.jsx'
 import { Suspense } from 'react'
-import { ErrorMessage } from '@components/status/ErrorMessage'
 
 export const Products = ({ data, error }) => {
-  if (error) return <ErrorMessage />
+  if (error) return "Error al cargar los productos"
   if (!data) return <LoaderCard />
 
   return (
