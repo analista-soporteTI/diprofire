@@ -30,3 +30,18 @@ export const getProjects = async () => {
   const response = await axios.get(endpoints_wp.POSTS)
   return response.data
 }
+
+export async function getPathsProjects () {
+  try {
+    const projects = await getProjects()
+
+    const paths = projects.map(project => ({
+      params: { slug: project.slug }
+    }))
+
+    return paths
+  } catch (error) {
+    console.error('Error fetching projects:', error)
+    throw error
+  }
+}

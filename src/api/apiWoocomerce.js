@@ -37,15 +37,13 @@ export const getTags = async () => {
 
 export async function getPathsProducts () {
   try {
-    const response = await FETCH_API_WC.get(`${API_WC}/products`)
-    const products = response.data
+    const products = await getProducts()
 
-    const paths = products.reduce((acc, product) => {
-      acc[product.slug] = product;
-      return acc;
-    }, {});
+    const paths = products.map(product => ({
+      params: { slug: product.slug }
+    }))
 
-    return { paths }
+    return paths
   } catch (error) {
     console.error('Error fetching products:', error)
     throw error

@@ -1,7 +1,12 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
 import { DetailProductLayout } from "@layouts/DetailProductLayout.jsx";
-export const prerender = false;
+import { getPathsProducts } from "@api/apiWoocomerce";
+
+export async function getStaticPaths() {
+  const paths = await getPathsProducts();
+  return paths;
+}
 
 const { slug } = Astro.params;
 ---

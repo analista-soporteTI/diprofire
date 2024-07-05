@@ -1,13 +1,16 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
 import { DetailProjectLayout } from "@layouts/DetailProjectLayout.jsx";
-export const prerender = false;
+import { getPathsProjects } from "@api/apiWordpress";
+
+export async function getStaticPaths() {
+  const paths = await getPathsProjects();
+  return paths;
+}
 
 const { slug } = Astro.params;
-
-const parsedSlug = slug?.replace(/-/g, " ");
 ---
 
-<MainLayout title={`Proyecto ${parsedSlug}`} description={`Conoce más detalles del proyecto de Diprofire: ${parsedSlug}`}>
+<MainLayout title={`Proyecto ${slug}`} description={`Conoce más detalles del proyecto de Diprofire: ${slug}`}>
   <DetailProjectLayout slug={slug} client:only />
 </MainLayout>
