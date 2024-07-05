@@ -1,7 +1,6 @@
 import { ButtonBack } from '@components/buttons/ButtonBack'
 import { ProductDetailAction } from '@components/products/ProductDetailAction'
 import { DetailProductLoader } from '@components/status/DetailProductLoader'
-import { ErrorMessage } from '@components/status/ErrorMessage'
 import { getProducts } from 'src/api/apiWoocomerce'
 import { Suspense } from 'react'
 import useSWR from 'swr'
@@ -13,7 +12,7 @@ export const DetailProductLayout = ({ slug }) => {
     dedupingInterval: 120000
   })
 
-  if (error) return <ErrorMessage />
+  if (error) return "Error al cargar los productos"
   if (!data) return <DetailProductLoader />
 
   const product = data.find(product => product.slug === slug)
