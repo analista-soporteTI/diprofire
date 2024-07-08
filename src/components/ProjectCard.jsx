@@ -12,7 +12,7 @@ export const ProjectCard = ({ project }) => {
   }
 
   return (
-    <a href={`/proyectos/${project.slug}`} className='w-fit h-fit'>
+    <a href={`/proyectos/${project.slug}`} className='w-fit h-fit mx-auto'>
       <article className='w-full max-w-[360px] overflow-hidden rounded-lg shadow transition hover:shadow-lg'>
         <div className='bg-white p-4 sm:p-6 text-start'>
           <h3 className='mt-0.5 text-lg text-gray-900 mb-4'>{project.title}</h3>
