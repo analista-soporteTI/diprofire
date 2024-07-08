@@ -13,7 +13,7 @@ export const ProductDetailAction = ({ product }) => {
     name: product.name,
     quantity: quantity,
     description: product.short_description,
-    codigoNp: product.sku,
+    sku: product.sku,
   }
 
   const mailto = mailtoDetailProduct(infoProduct)
@@ -31,7 +31,7 @@ export const ProductDetailAction = ({ product }) => {
       quantity: quantity,
       image: product.images[0].src,
       description: product.short_description,
-      codigoNp: product.sku
+      sku: product.sku
     })
   }
 
