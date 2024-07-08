@@ -1,6 +1,6 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
-import { GalleryProjects } from "@components/GalleryProjects.jsx"; 
+import { GalleryProjects } from "@components/GalleryProjects.jsx";
 ---
 
 <MainLayout
@@ -8,10 +8,12 @@ import { GalleryProjects } from "@components/GalleryProjects.jsx";
   description="Aquí encontrarás los proyectos de los que hemos formado parte. Conoce más sobre ellos."
 >
   <main class="pt-28 pb-20">
-    <h1 class="text-center text-3xl sm:text-5xl font-bold mb-4">Proyectos</h1>
-    <p class="text-center sm:text-lg mb-10">
-      Conoce más sobre los proyectos de los que hemos formado parte.
-    </p>
-    <GalleryProjects client:only />
+    <section>
+      <h1 class="text-center text-3xl sm:text-5xl font-bold mb-4">Proyectos</h1>
+      <p class="text-center sm:text-lg mb-10">
+        Conoce más sobre los proyectos de los que hemos formado parte.
+      </p>
+      <GalleryProjects client:only />
+    </section>
   </main>
 </MainLayout>
