@@ -24,6 +24,9 @@
       "@api/*": [
         "src/api/*"
       ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react",
