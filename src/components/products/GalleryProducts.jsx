@@ -1,10 +1,12 @@
+import { useEffect } from 'react'
 import useSWR from 'swr'
 import { getCategories, getProducts } from 'src/api/apiWoocomerce.js'
 import { Aside } from '@components/products/Aside.jsx'
 import { Products } from '@components/Products'
-import { useEffect, useState } from 'react'
 import { LoaderCardSmall } from '@components/status/LoaderCard'
 import { AsideLoader } from '@components/status/AsideLoader'
+import useProductStore from '@hooks/storeProducts.js'
+import useCategoryStore from '@hooks/storeCategories'
 
 export const GalleryProducts = () => {
   const { data: categories, error: errorCategories } = useSWR(
@@ -17,33 +19,40 @@ export const GalleryProducts = () => {
     getProducts
   )
 
-  const listCategories = categories?.filter(
-    category => category.name !== 'Sin categorizar'
-  )
-
-  const [listProducts, setListProducts] = useState([])
+  const listCategories = useCategoryStore(state => state.categories)
+  const setCategories = useCategoryStore(state => state.setCategories)
+  const productList = useProductStore(state => state.products)
+  const setProductList = useProductStore(state => state.setProducts)
 
   useEffect(() => {
-    if (products) {
-      setListProducts(products)
+    if (categories) {
+      const filterCategories = categories.filter(
+        category => category.name !== 'Sin categorizar'
+      )
+      setCategories(filterCategories)
     }
-  }, [products])
+  }, [categories, setCategories])
+
+  useEffect(() => {
+    if (products && !productList.length) {
+      setProductList(products)
+    }
+  }, [products, productList, setProductList])
 
   const handleCategories = category => {
     if (category === '') {
-      return setListProducts(products)
+      setProductList(products)
+    } else {
+      const filtered = products?.filter(product =>
+        product.categories.some(cat => cat.name === category)
+      )
+      setProductList(filtered)
     }
-
-    let filtered = products?.filter(product =>
-      product.categories.some(cat => cat.name === category)
-    )
-
-    setListProducts(filtered)
   }
 
   return (
     <div className='flex gap-10'>
-      {!listCategories && <AsideLoader />}
+      {!categories && !listCategories && <AsideLoader />}
       {listCategories && (
         <Aside
           handleCategories={handleCategories}
@@ -59,8 +68,8 @@ export const GalleryProducts = () => {
           {errorProducts && (
             <p className='text-center'>Error al cargar los productos</p>
           )}
-          {!products && <LoaderCardSmall />}
-          {listProducts && <Products data={listProducts} />}
+          {!products && !productList.length && <LoaderCardSmall />}
+          {productList.length > 0 && <Products data={productList} />}
         </section>
       </main>
     </div>
