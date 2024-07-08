@@ -62,17 +62,17 @@ export const CartUI = () => {
       )}
       <div className='flex flex-col gap-y-4 mt-5 p-5 rounded-md'>
         <div className='grid grid-cols-3 gap-4 items-center text-lg font-semibold border-b border-black/20 pb-4'>
-          <p className='col-span-2'>Producto</p>
-          <p className='col-span-1'>Cantidad</p>
+          <p className='col-span-2 max-sm:col-span-3'>Producto</p>
+          <p className='col-span-1 max-sm:hidden'>Cantidad</p>
         </div>
         <div>
           <ul>
             {cart.map(item => (
               <li
                 key={item.name}
-                className='first:mt-0 last:mb-0 my-4 grid grid-cols-3 gap-4 items-center'
+                className='first:mt-0 last:mb-0 my-4 grid sm:grid-cols-1 md:grid-cols-3 gap-4 items-center'
               >
-                <div className='flex items-center gap-4 col-span-2'>
+                <div className='flex items-center gap-4 col-span-2 sm:col-span-1 md:col-span-2 flex-wrap'>
                   <button
                     onClick={() => handleRemoveFromCart(item.id)}
                     className='hover:opacity-70'
@@ -82,13 +82,16 @@ export const CartUI = () => {
                   <img
                     src={item.image}
                     alt={`Previsualización del producto: ${item.name}`}
-                    className='max-w-[40px] rounded-md'
+                    className='max-w-[40px] sm:max-w-[60px] md:max-w-[40px] rounded-md'
                   />
-                  <p className='w-fit block'>{item.name}</p>
+                  <div>
+                    <p className='w-fit block'>{item.name}</p>
+                    <p className='w-fit block'>{`Código/NP: ${item.sku}`}</p>
+                  </div>
                 </div>
                 <Quantity
                   key={item.id}
-                  className='col-span-1'
+                  className='col-span-1 sm:col-span-1 md:col-span-1'
                   value={item.quantity}
                   addQuantity={() => handleAddToCart(item)}
                   subQuantity={() =>
@@ -104,7 +107,7 @@ export const CartUI = () => {
       <div className='flex flex-wrap gap-4 mt-8 ml-3'>
         <ButtonCartPrimary
           disabled={cart.length === 0}
-          href={mailtoCartProducts()}
+          href={mailtoCartProducts(cart)}
         >
           Enviar cotización
         </ButtonCartPrimary>
