@@ -7,9 +7,13 @@ import protecto from "@assets/brands/protectowire.png";
 import History from "@components/enterprise/History.astro";
 import PoliticValues from "@components/enterprise/PoliticValues.astro";
 import WorkWithUs from "@components/enterprise/WorkWithUs.astro";
+import { META_PAGES } from "@consts/metaPages";
 ---
 
-<MainLayout title="Empresa | Diprofire" description="">
+<MainLayout
+  title={META_PAGES.ENTERPRISE.title}
+  description={META_PAGES.ENTERPRISE.description}
+>
   <main class="pt-24">
     <section class="text-center py-10">
       <h1 class="text-3xl sm:text-5xl font-bold mb-4">Diprofire Chile Ltda.</h1>

@@ -1,11 +1,12 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
 import { CartUI } from "@components/cart/CartUI.jsx";
+import { META_PAGES } from "@consts/metaPages";
 ---
 
 <MainLayout
-	title="Carrito | Diprofire"
-	description="En Diprofire encontrará una amplia selección de la mejor alternativa de aplicaciones de seguridad, apegándonos a las normas nacionales e internacionales."
+	title={META_PAGES.CART.title}
+	description={META_PAGES.CART.description}
 >
 	<main class="w-full max-w-7xl mx-auto">
 		<CartUI client:only />

@@ -1,11 +1,12 @@
 ---
 import { GalleryProducts } from "@components/products/GalleryProducts.jsx";
 import MainLayout from "@layouts/MainLayout.astro";
+import { META_PAGES } from "@consts/metaPages";
 ---
 
 <MainLayout
-  title="Diprofire - Productos"
-  description="Productos de seguridad y protección contra incendios."
+  title={META_PAGES.PROJECTS.title}
+  description={META_PAGES.PROJECTS.description}
 >
   <GalleryProducts client:only />
 </MainLayout>

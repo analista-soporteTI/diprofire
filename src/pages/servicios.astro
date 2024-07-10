@@ -4,11 +4,12 @@ import { ServiceSection } from "@components/services/ServiceSection.jsx";
 import { ButtonPrimary } from "@components/buttons/ButtonPrimary";
 import { Image } from "astro:assets";
 import heroImg from "@assets/servicios/instalacion.webp";
+import { META_PAGES } from "@consts/metaPages";
 ---
 
 <MainLayout
-  title="Servicios"
-  description="Conoce los servicios que ofrecemos en nuestra empresa."
+  title={META_PAGES.SERVICES.title}
+  description={META_PAGES.SERVICES.description}
 >
   <main class="pb-10 z-10">
     <section class="relative overflow-hidden">

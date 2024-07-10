@@ -6,11 +6,12 @@ import MainLayout from "@layouts/MainLayout.astro";
 import { SliderBanner } from "@components/sliders/SliderBanner.jsx";
 import SliderBrands from "@components/sliders/SliderBrands.astro";
 import { CategoryProducts } from "@components/products/CategoryProducts.jsx";
+import { META_PAGES } from "@consts/metaPages";
 ---
 
 <MainLayout
-	title="Diprofire | Sistemas de Proteccion contra incendios"
-	description="En Diprofire encontrará una amplia selección de la mejor alternativa de aplicaciones de seguridad, apegándonos a las normas nacionales e internacionales."
+	title={META_PAGES.HOME.title}
+	description={META_PAGES.HOME.description}
 >
 	<Hero />
 	<About />

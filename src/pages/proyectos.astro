@@ -1,11 +1,12 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
 import { GalleryProjects } from "@components/GalleryProjects.jsx";
+import { META_PAGES } from "@consts/metaPages";
 ---
 
 <MainLayout
-  title="Proyectos | Diprofire"
-  description="Aquí encontrarás los proyectos de los que hemos formado parte. Conoce más sobre ellos."
+  title={META_PAGES.PROJECTS.title}
+  description={META_PAGES.PROJECTS.description}
 >
   <main class="pt-28 pb-20">
     <section>
