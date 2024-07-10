@@ -1,0 +1,53 @@
+---
+import ValuesItem from "./ValuesItem.astro";
+
+const values = [
+  {
+    title: "Conducta Ética",
+    description:
+      "Actuamos con profesionalidad, integridad, transparencia, respeto y honestidad.",
+  },
+  {
+    title: "Seguridad y salud",
+    description:
+      "Nos comprometemos decididamente con la seguridad y salud laboral promoviendo una cultura preventiva.",
+  },
+  {
+    title: "Experiencia y desarrollo profesional",
+    description:
+      "Motivamos a nuestro personal a través de la confianza, potenciando y capacitando continuamente.",
+  },
+  {
+    title: "Responsabilidad",
+    description:
+      "Responsabilidad con los clientes, accionistas, socios y empleados con respecto a compromisos, resultados y calidad.",
+  },
+  {
+    title: "Mejora continua",
+    description:
+      "Introducimos nuevos productos en la protección contra incendios, siempre ofreciendo la mejor relación precio-calidad-garantías del mercado.",
+  },
+  {
+    title: "Participación personal",
+    description:
+      "Fomentamos el trabajo en equipo para lograr un objetivo común, compartiendo la información y los conocimientos.",
+  },
+];
+---
+
+<section
+  class="w-full max-w-[1400px] mx-auto flex flex-col sm:justify-center gap-10 pt-52 sm:pt-24 px-4 sm:px-10"
+>
+  <h2 class="text-2xl sm:text-4xl font-bold mb-8">
+    Nuestras Políticas y Valores
+  </h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+    {
+      values.map((value, index) => (
+        <ValuesItem title={value.title} key={index}>
+          <i>"{value.description}"</i>
+        </ValuesItem>
+      ))
+    }
+  </div>
+</section>
