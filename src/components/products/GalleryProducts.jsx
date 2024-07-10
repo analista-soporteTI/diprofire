@@ -51,7 +51,7 @@ export const GalleryProducts = () => {
   }
 
   return (
-    <div className='flex gap-10'>
+    <div className='flex flex-col justify-center lg:flex-row lg:justify-start gap-10'>
       {!categories && !listCategories && <AsideLoader />}
       {listCategories && (
         <Aside
@@ -60,7 +60,7 @@ export const GalleryProducts = () => {
           errorCategories={errorCategories}
         />
       )}
-      <main className='pt-24 pb-10 z-10'>
+      <main className='pt-10 lg:pt-24 pb-10 z-10'>
         <section>
           <h1 className='mb-10 text-3xl font-bold text-center lg:text-start lg:pl-10'>
             Todos nuestros productos
