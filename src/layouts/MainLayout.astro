@@ -1,6 +1,7 @@
 ---
 import '@fontsource/lato';
 import { Navbar } from "@components/Navbar.jsx";
+import Footer from '@components/sections/Footer.astro';
 
 interface Props {
 	title: string;
@@ -24,6 +25,7 @@ const { title, description } = Astro.props;
 	<body class="bg-zinc-100 text-zinc-900">
 		<Navbar client:only />
 		<slot />
+		<Footer />
 	</body>
 </html>
 <style is:global>
@@ -39,6 +41,9 @@ const { title, description } = Astro.props;
 		text-wrap: pretty;
 	}
 	.bg-section-clip {
-		clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+		clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 90%);
+	}
+	.bg-section-clip-reverse {
+		clip-path: polygon(0 0, 100% 10%, 100% 90%, 0% 100%);
 	}
 </style>
