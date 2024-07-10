@@ -8,5 +8,7 @@ import { META_PAGES } from "@consts/metaPages";
   title={META_PAGES.PROJECTS.title}
   description={META_PAGES.PROJECTS.description}
 >
-  <GalleryProducts client:only />
+  <div class="min-h-[100vh]">
+    <GalleryProducts client:only />
+  </div>
 </MainLayout>
