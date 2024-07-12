@@ -1,16 +1,15 @@
 import { create } from 'zustand'
 
-const useProjectStore = create(set => ({
-  projects: [],
-  setProjects: projects => {
-    set({ projects })
-    localStorage.setItem('projects', JSON.stringify(projects))
-  }
-}))
+const useProjectStore = create(set => {
+  const storedProjects = JSON.parse(localStorage.getItem('projects')) || []
 
-const storedProjects = JSON.parse(localStorage.getItem('projects')) || []
-if (storedProjects.length > 0) {
-  useProjectStore.setState({ projects: storedProjects })
-}
+  return {
+    projects: storedProjects,
+    setProjects: projects => {
+      set({ projects })
+      localStorage.setItem('projects', JSON.stringify(projects))
+    }
+  }
+})
 
 export default useProjectStore

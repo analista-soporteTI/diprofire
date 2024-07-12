@@ -1,16 +1,15 @@
 import { create } from 'zustand'
 
-const useProductStore = create(set => ({
-  products: [],
-  setProducts: products => {
-    set({ products })
-    localStorage.setItem('products', JSON.stringify(products))
-  }
-}))
+const useProductStore = create(set => {
+  const storedProducts = JSON.parse(localStorage.getItem('products')) || []
 
-const storedProducts = JSON.parse(localStorage.getItem('products')) || []
-if (storedProducts.length > 0) {
-  useProductStore.setState({ products: storedProducts })
-}
+  return {
+    products: storedProducts,
+    setProducts: products => {
+      set({ products })
+      localStorage.setItem('products', JSON.stringify(products))
+    }
+  }
+})
 
 export default useProductStore
