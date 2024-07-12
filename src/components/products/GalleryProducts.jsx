@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
+import { getCategories, getProducts } from 'src/api/apiWoocomerce'
 import useSWR from 'swr'
-import { getCategories, getProducts } from 'src/api/apiWoocomerce.js'
-import { Aside } from '@components/products/Aside.jsx'
-import { Products } from '@components/Products'
-import { LoaderCardSmall } from '@components/status/LoaderCard'
-import { AsideLoader } from '@components/status/AsideLoader'
-import useProductStore from '@hooks/storeProducts.js'
+import useProductStore from '@hooks/storeProducts'
 import useCategoryStore from '@hooks/storeCategories'
+import { Aside } from '@components/products/Aside'
+import { AsideLoader } from '@components/status/AsideLoader'
+import { CardProduct } from '@components/products/CardProduct'
+import { LoaderCardSmall } from '@components/status/LoaderCard'
+import { StatusMessage } from '@components/status/StatusMessage'
 
 export const GalleryProducts = () => {
   const { data: categories, error: errorCategories } = useSWR(
@@ -34,10 +35,10 @@ export const GalleryProducts = () => {
   }, [categories, setCategories])
 
   useEffect(() => {
-    if (products && !productList.length) {
+    if (products) {
       setProductList(products)
     }
-  }, [products, productList, setProductList])
+  }, [products, setProductList])
 
   const handleCategories = category => {
     if (category === '') {
@@ -62,14 +63,29 @@ export const GalleryProducts = () => {
       )}
       <main className='pt-10 lg:pt-24 pb-10 z-10'>
         <section>
-          <h1 className='mb-10 text-3xl font-bold text-center lg:text-start lg:pl-10'>
+          <h1 className='mb-10 text-3xl font-bold text-center lg:text-start'>
             Todos nuestros productos
           </h1>
           {errorProducts && (
-            <p className='text-center'>Error al cargar los productos</p>
+            <StatusMessage
+              message='Error al cargar los productos'
+              className='w-fit mx-auto mb-10'
+            />
           )}
-          {!products && !productList.length && <LoaderCardSmall />}
-          {productList.length > 0 && <Products data={productList} />}
+          {!products && !errorProducts && <LoaderCardSmall />}
+          {products && (
+            <ul className='w-full mx-auto px-4 sm:px-10 gap-10 gap-y-8 flex flex-wrap justify-center lg:justify-start'>
+              {productList.map(({ slug, name, images }) => (
+                <CardProduct
+                  key={slug}
+                  url={`/productos/${slug}/`}
+                  name={name}
+                  img={images[0].src}
+                  alt={images[0].alt}
+                />
+              ))}
+            </ul>
+          )}
         </section>
       </main>
     </div>
