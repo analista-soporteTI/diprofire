@@ -39,7 +39,7 @@ export const CartUI = () => {
   }
 
   return (
-    <section className='pt-24 px-3'>
+    <section className='py-24 px-3 min-h-screen'>
       <h1 className='text-3xl font-bold mb-8'>Carrito de cotizaciones</h1>
       <ButtonBack href='/productos'>Seguir cotizando</ButtonBack>
       {cart.length === 0 && (
