@@ -6,7 +6,10 @@ import useCategoryStore from '@hooks/storeCategories'
 import { Aside } from '@components/products/Aside'
 import { AsideLoader } from '@components/status/AsideLoader'
 import { CardProduct } from '@components/products/CardProduct'
-import { LoaderCardSmall } from '@components/status/LoaderCard'
+import {
+  ListLoaderCardSmall,
+  SingleLoaderCardSmall
+} from '@components/status/LoaderCard'
 import { StatusMessage } from '@components/status/StatusMessage'
 
 export const GalleryProducts = () => {
@@ -17,12 +20,19 @@ export const GalleryProducts = () => {
 
   const { data: products, error: errorProducts } = useSWR(
     'products',
-    getProducts
+    getProducts,
+    {
+      onLoadingSlow: () => <SingleLoaderCardSmall />,
+      onSuccess: data => {
+        addProductList(data)
+      }
+    }
   )
 
   const listCategories = useCategoryStore(state => state.categories)
   const setCategories = useCategoryStore(state => state.setCategories)
   const productList = useProductStore(state => state.products)
+  const addProductList = useProductStore(state => state.addProducts)
   const setProductList = useProductStore(state => state.setProducts)
 
   useEffect(() => {
@@ -32,13 +42,7 @@ export const GalleryProducts = () => {
       )
       setCategories(filterCategories)
     }
-  }, [categories, setCategories])
-
-  useEffect(() => {
-    if (products) {
-      setProductList(products)
-    }
-  }, [products, setProductList])
+  }, [categories])
 
   const handleCategories = category => {
     if (category === '') {
@@ -72,8 +76,7 @@ export const GalleryProducts = () => {
               className='w-fit mx-auto mb-10'
             />
           )}
-          {!products && !errorProducts && <LoaderCardSmall />}
-          {products && (
+          {products && productList ? (
             <ul className='w-full mx-auto px-4 sm:px-10 gap-10 gap-y-8 flex flex-wrap justify-center lg:justify-start'>
               {productList.map(({ slug, name, images }) => (
                 <CardProduct
@@ -85,6 +88,8 @@ export const GalleryProducts = () => {
                 />
               ))}
             </ul>
+          ) : (
+            <ListLoaderCardSmall />
           )}
         </section>
       </main>
