@@ -1,7 +1,5 @@
 ---
 import FooterEnterprise from "@components/footers/FooterEnterprise.astro";
-import FooterLinkItem from "@components/footers/FooterLinkItem.astro";
-import { footerLinks } from "@consts/footerLinks.js";
 
 const currentlyDate = new Date();
 const currentlyYear = currentlyDate.getFullYear();
@@ -12,25 +10,10 @@ const currentlyYear = currentlyDate.getFullYear();
     class="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8"
   >
     <FooterEnterprise />
-
-    <div
-      class="w-full max-w-[1200px] flex flex-wrap justify-start gap-10 lg:gap-20 border-t border-gray-200 pt-8 lg:pt-16"
-    >
-      {
-        footerLinks.map((list: any) => (
-          <div class="w-fit h-fit">
-            <p class="font-bold text-gray-900">{list.title}</p>
-            <ul class="mt-6 space-y-4 text-sm">
-              {list.links.map((link: any) => (
-                <FooterLinkItem href={link.url}>{link.name}</FooterLinkItem>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
-    </div>
   </div>
-  <p class="text-xs text-gray-500 pb-10 mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+  <p
+    class="text-xs text-gray-500 pb-10 mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8"
+  >
     &copy; {currentlyYear}. Diprofire Chile Ltda.
   </p>
 </footer>
