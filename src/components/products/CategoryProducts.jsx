@@ -4,10 +4,10 @@ import { FireIcon } from '@icons/categories/Fire.jsx'
 import { ShieldIcon } from '@icons/categories/Shield'
 import { RadarIcon } from '@icons/categories/Radar'
 
-import picture1 from '@assets/pictures/deteccion.png'
-import picture2 from '@assets/pictures/extincion.png'
-import picture3 from '@assets/pictures/deteccion.png'
-import picture4 from '@assets/pictures/extincion.png'
+import picture1 from '@assets/servicios/deteccion incendio.webp'
+import picture2 from '@assets/servicios/sistema extinsion agua.webp'
+import picture3 from '@assets/servicios/agente limpio.webp'
+import picture4 from '@assets/servicios/proteccion pasiva.webp'
 
 const categoryImages = [picture1, picture2, picture3, picture4]
 const altImages = [
@@ -27,8 +27,8 @@ export const CategoryProducts = () => {
 
   return (
     <section className='my-20'>
-      <div className='w-full max-w-[1300px] mx-auto justify-center flex flex-wrap gap-y-12'>
-        <div className='max-w-[70ch] px-4'>
+      <div className='w-full max-w-[1300px] mx-auto max-[740px]:px-4 justify-between flex flex-wrap gap-y-12'>
+        <div className='max-w-[460px] px-4'>
           <h2 className='text-3xl font-bold sm:text-4xl mb-4'>
             <span className='text-green-600'>Productos especializados</span>{' '}
             para tu proyecto
@@ -45,7 +45,7 @@ export const CategoryProducts = () => {
               </li>
               <li onMouseEnter={() => handleCategoryChange(2)}>
                 <ExtinguisherIcon className='w-6 h-6' />
-                Agentes limpio
+                Agentes limpios
               </li>
               <li onMouseEnter={() => handleCategoryChange(3)}>
                 <ShieldIcon className='w-6 h-6' />
@@ -60,7 +60,7 @@ export const CategoryProducts = () => {
             Ver productos
           </a>
         </div>
-        <figure className='w-full max-w-[600px] h-[400px] bg-cover bg-center bg-no-repeat relative overflow-hidden rounded-lg max-xl:hidden'>
+        <figure className='w-full max-[740px]:h-[240px] min-[740px]:max-w-[280px] min-[860px]:max-w-[400px] min-[1060px]:max-w-[600px] h-[400px] bg-cover bg-center bg-no-repeat relative overflow-hidden rounded-lg '>
           {
             <img
               src={category.src}
