@@ -1,0 +1,23 @@
+---
+import { ContactForm } from "@components/ContactForm";
+import MainLayout from "@layouts/MainLayout.astro";
+import { META_PAGES } from "@consts/metaPages";
+---
+
+<MainLayout
+  title={META_PAGES.CONTACT.title}
+  description={META_PAGES.CONTACT.description}
+>
+  <main class="pb-20 px-4 sm:px-6 min-h-screen">
+    <h1
+      class="pt-28 text-center text-3xl sm:text-4xl md:text-5xl font-bold mb-4 px-4"
+    >
+      Contacto
+    </h1>
+    <p class="text-center my-10 max-w-[50ch] mx-auto">
+      Si tienes alguna duda o consulta, no dudes en contactar con nosotros a
+      través del siguiente formulario.
+    </p>
+    <ContactForm client:only />
+  </main>
+</MainLayout>
