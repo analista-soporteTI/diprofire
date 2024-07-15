@@ -14,13 +14,10 @@ if (!product) return Astro.redirect("/404");
 const { name, description, short_description, tags, images, sku } = product;
 
 const parsed_description = description.replace(/<[^>]*>?/gm, "");
-const parsed_short_description = short_description.replace(
-  /<[^>]*>?/gm,
-  "",
-);
+const parsed_short_description = short_description.replace(/<[^>]*>?/gm, "");
 ---
 
-<MainLayout title="Producto" description="Descripción del producto">
+<MainLayout title={name} description={`Detalles del producto: ${name}`}>
   <div class="flex gap-10 w-fit mx-auto">
     <main class="px-4 sm:px-10 py-24 w-full max-w-5xl z-10">
       <div>
