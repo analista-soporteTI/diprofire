@@ -7,19 +7,22 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "wrangler pages dev ./dist",
-    "astro": "astro"
+    "astro": "astro",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
     "@astrojs/cloudflare": "^11.0.1",
     "@astrojs/react": "^3.6.0",
     "@astrojs/tailwind": "^5.1.0",
+    "@emailjs/browser": "^4.4.1",
     "@fontsource/lato": "^5.0.21",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "astro": "^4.11.3",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
+    "formik": "^2.4.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-slot-counter": "^3.0.0",
@@ -27,6 +30,11 @@
     "swr": "^2.2.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
+    "yup": "^1.4.0",
     "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.1",
+    "@types/node": "^20.14.10"
   }
 }
