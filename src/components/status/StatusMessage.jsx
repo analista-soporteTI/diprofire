@@ -1,16 +1,23 @@
 import { ErrorIcon } from '@icons/status/Error'
+import { SuccessIcon } from '@icons/status/Sucess'
+import { STATUS } from '@consts/status'
 
 export const StatusMessage = ({
   message,
   description,
-  className = ''
+  className = '',
+  type = STATUS.ERROR
 }) => {
   return (
     <div className={`text-sm ${className}`}>
       <div className='w-full h-fit py-2 flex items-center justify-between gap-4 rounded-lg bg-zinc-200 pl-2 pr-3'>
         <div className='flex gap-2'>
-          <div className='text-[#d65563]'>
-            <ErrorIcon className='w-6 h-6' />
+          <div>
+            {type === 'success' ? (
+              <SuccessIcon className='w-6 h-6 text-green-600' />
+            ) : (
+              <ErrorIcon className='w-6 h-6 text-red-600' />
+            )}
           </div>
           <div className={description ? '' : 'my-auto'}>
             <p>{message}</p>
