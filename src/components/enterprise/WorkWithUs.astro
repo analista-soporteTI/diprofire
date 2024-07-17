@@ -1,38 +1,60 @@
 ---
-const mailto = `mailto:diprofire@diprofire.cl?subject=CV%20-%20${encodeURIComponent("Nombre Apellido")}
-&body=${encodeURIComponent("Adjunto mi CV para postular a una vacante en Diprofire.")}
-`;
+import { ButtonPrimary } from "@components/buttons/ButtonPrimary";
+import { Image } from "astro:assets";
+import oficina from "@assets/pictures/oficina.webp";
+import taller from "@assets/pictures/taller.webp";
+import sala_reunion from "@assets/pictures/sala-reunion.webp";
+import almacen from "@assets/pictures/almacen.webp";
+
+const mailto = `mailto:diprofire@diprofire.cl?subject=CV%20-%20${encodeURIComponent("Nombre Apellido")}&body=${encodeURIComponent("Adjunto mi CV para postular a una vacante en Diprofire.")}`;
 ---
 
 <section
-  class="relative overflow-hidden w-full max-w-4xl my-20 mx-auto flex flex-col items-center gap-4 rounded-lg bg-zinc-100 p-6 sm:flex-row sm:justify-between shadow-md"
+  class="w-full max-w-7xl mx-auto py-10 px-4 sm:px-10 flex flex-col min-[830px]:flex-row items-center gap-12"
 >
-  <div
-    class="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(22,163,64,.15),rgba(255,255,255,0))]"
-  >
-  </div>
-  <div
-    class="absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(220,38,38,.15),rgba(255,255,255,0))]"
-  >
-  </div>
-
-  <div class="flex flex-col gap-2">
-    <strong
-      class="z-10 text-xl sm:text-2xl md:text-3xl text-balance text-center sm:text-start"
-      >Trabaja con nosotros</strong
+  <div class="flex-1">
+    <h1
+      class="text-2xl sm:text-4xl font-bold text-balance"
     >
+      Trabaja con nosotros
+    </h1>
     <p
-      class="z-10 max-w-[60ch] text-lg text-balance text-center sm:text-start opacity-95"
+      class="max-w-[60ch] text-lg leading-relaxed text-balance mt-4 mb-6"
     >
       En Diprofire estamos en constante búsqueda de nuevos talentos para
-      incorporar a nuestro equipo de trabajo.
+      incorporar a nuestro equipo de trabajo y seguir creciendo.
     </p>
+    <p
+      class="max-w-[60ch] text-lg leading-relaxed text-balance mb-6"
+    >
+      Nuestras oficinas y taller se encuentran en la comuna de Antofagasta,
+      Chile. Si te interesa trabajar con nosotros, envíanos tu CV y nos
+      pondremos en contacto contigo.
+    </p>
+    <div class="flex justify-start">
+      <ButtonPrimary href={mailto}>Postula con tu CV</ButtonPrimary>
+    </div>
   </div>
-
-  <a
-    href={mailto}
-    class="z-10 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-green-200 px-8 py-3 text-green-600 hover:bg-green-200/40 focus:outline-none focus:ring active:bg-white/90 duration-200"
-  >
-    <span class="text-base font-bold">Enviar CV</span>
-  </a>
+  <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <Image
+      src={oficina}
+      alt="Oficina Diprofire"
+      class="rounded-lg w-full shadow-lg aspect-video object-cover"
+    />
+    <Image
+      src={taller}
+      alt="Taller Diprofire"
+      class="rounded-lg w-full shadow-lg aspect-video object-cover"
+    />
+    <Image
+      src={sala_reunion}
+      alt="Oficina Diprofire"
+      class="rounded-lg w-full shadow-lg aspect-video object-cover"
+    />
+    <Image
+      src={almacen}
+      alt="Taller Diprofire"
+      class="rounded-lg w-full shadow-lg aspect-video object-cover"
+    />
+  </div>
 </section>

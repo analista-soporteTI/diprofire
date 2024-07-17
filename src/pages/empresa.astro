@@ -5,6 +5,7 @@ import kidde from "@assets/brands/kidde.png";
 import logo3M from "@assets/brands/3M.png";
 import protecto from "@assets/brands/protectowire.png";
 import History from "@components/enterprise/History.astro";
+import MisionVision from "@components/enterprise/MisionVision.astro";
 import PoliticValues from "@components/enterprise/PoliticValues.astro";
 import WorkWithUs from "@components/enterprise/WorkWithUs.astro";
 import { META_PAGES } from "@consts/metaPages";
@@ -15,7 +16,7 @@ import { META_PAGES } from "@consts/metaPages";
   description={META_PAGES.ENTERPRISE.description}
 >
   <main class="pt-24">
-    <section class="text-center py-10">
+    <section class="text-center py-10 px-4 sm:px-10">
       <h1 class="text-3xl sm:text-5xl font-bold mb-4">Diprofire Chile Ltda.</h1>
       <p class="text-lg sm:text-xl font-medium mb-4">Representantes en Chile</p>
       <div
@@ -33,6 +34,7 @@ import { META_PAGES } from "@consts/metaPages";
       </div>
     </section>
     <History />
+    <MisionVision />
     <PoliticValues />
     <WorkWithUs />
   </main>
