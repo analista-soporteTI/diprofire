@@ -73,7 +73,7 @@ export const ProductDetailAction = ({ product }) => {
       <div className='flex gap-2 sm:gap-4'>
         <ButtonPrimary
           href={mailto}
-          style='xl:ml-5 text-sm sm:text-base px-10 sm:px-14'
+          style='xl:ml-5 text-sm sm:text-base sm:!px-10'
         >
           Cotizar
         </ButtonPrimary>
