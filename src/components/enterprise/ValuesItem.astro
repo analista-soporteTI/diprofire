@@ -1,11 +1,11 @@
 ---
-const { title } = Astro.props;
+const { title, content } = Astro.props;
 ---
 
-<div class="max-w-[45ch]">
-  <h3 class="text-xl sm:text-2xl font-semibold flex gap-1 items-center mb-2">
-    <slot name="icon" />
+<div class="w-full max-w-[40ch] min-h-[100px]">
+  <slot />
+  <h3 class="text-base md:text-2xl xl:text-3xl font-bold flex gap-1 items-center mb-2">
     {title}
   </h3>
-  <slot />
+  <i class="text-sm max-w-[50ch]">"{content}"</i>
 </div>
