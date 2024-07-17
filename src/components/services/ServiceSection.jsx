@@ -1,7 +1,6 @@
 
 import desarrolloIngenieria from '@assets/servicios/desarrollo ingenieria.webp'
 import agenteLimpio from '@assets/servicios/agente limpio.webp'
-import sistemaAguaNebulizada from '@assets/servicios/agua nebulizada.webp'
 import deteccionIncendio from '@assets/servicios/deteccion incendio.webp'
 import proteccionPasiva from '@assets/servicios/proteccion pasiva.webp'
 import sistemaEspuma from '@assets/servicios/sistema espuma.webp'
@@ -103,18 +102,6 @@ const servicesData = [
     items: [
       'Bombas principales y jockey para restaurar la presión',
       'Cálculo e instalación precisa para asegurar su correcta operación'
-    ]
-  },
-  {
-    img: sistemaAguaNebulizada,
-    title: 'Sistemas en Base a Agua Nebulizada (Water Mist)',
-    description:
-      'Utilizamos partículas finas de agua nebulizada para controlar y suprimir incendios con un menor consumo de agua, ideal para:',
-    items: [
-      'Transformadores',
-      'Archivos Museos',
-      'Bibliotecas',
-      'Aerogeneradores'
     ]
   },
   {
