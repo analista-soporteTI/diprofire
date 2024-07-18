@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import useSWR from 'swr'
 import { getProjects } from '@api/apiWordpress'
 import { ProjectCard } from '@components/ProjectCard.jsx'
-import { ListLoaderCardBig } from '@components/status/LoaderCard'
+import { LoaderCardBig } from '@components/status/LoaderCard'
 import useProjectStore from '@hooks/storeProjects'
 import { StatusMessage } from '@components/status/StatusMessage'
 
@@ -41,12 +41,12 @@ export const GalleryProjects = () => {
         </div>
       ) : (
         <div className='max-w-[1200px] mx-auto gap-10 px-4 grid grid-cols-1 lg:grid-cols-2'>
-          <ListLoaderCardBig />
-          <ListLoaderCardBig />
-          <ListLoaderCardBig />
-          <ListLoaderCardBig />
-          <ListLoaderCardBig />
-          <ListLoaderCardBig />
+          <LoaderCardBig />
+          <LoaderCardBig />
+          <LoaderCardBig />
+          <LoaderCardBig />
+          <LoaderCardBig />
+          <LoaderCardBig />
         </div>
       )}
     </>
