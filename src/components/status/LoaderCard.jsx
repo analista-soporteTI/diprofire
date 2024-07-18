@@ -1,5 +1,3 @@
-import '@styles/loader-card.css'
-
 export const LoaderCardSmall = () => {
   return (
     <div className='w-[240px] max-h-[284px] rounded-md overflow-hidden'>
@@ -15,7 +13,7 @@ export const LoaderCardSmall = () => {
 
 export const LoaderCardBig = () => {
   return (
-    <div className='loader-card min-h-[140px] rounded-md max-w-sm min-w-full'>
+    <div className='min-h-[140px] rounded-md max-w-sm min-w-full'>
       <div className='animate-pulse flex space-x-4'>
         <div className='flex-1 py-1'>
           <div className='h-3 bg-gray-300 rounded w-1/3'></div>
