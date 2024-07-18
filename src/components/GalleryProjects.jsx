@@ -34,13 +34,20 @@ export const GalleryProjects = () => {
         />
       )}
       {data && projects ? (
-        <div className='max-w-[1400px] mx-auto gap-10 px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+        <div className='max-w-[1200px] mx-auto gap-10 px-4 grid grid-cols-1 lg:grid-cols-2'>
           {projects.map(project => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       ) : (
-        <ListLoaderCardBig />
+        <div className='max-w-[1200px] mx-auto gap-10 px-4 grid grid-cols-1 lg:grid-cols-2'>
+          <ListLoaderCardBig />
+          <ListLoaderCardBig />
+          <ListLoaderCardBig />
+          <ListLoaderCardBig />
+          <ListLoaderCardBig />
+          <ListLoaderCardBig />
+        </div>
       )}
     </>
   )
