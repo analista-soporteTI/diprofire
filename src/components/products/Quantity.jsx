@@ -19,14 +19,14 @@ export const Quantity = ({
       <button
         type='button'
         onClick={() => subQuantity()}
-        className='px-3 py-2 bg-gray-200 rounded-l-md hover:bg-gray-300'
+        className='px-3 py-1 bg-gray-200 rounded-l-md hover:bg-gray-300'
       >
         -
       </button>
       <input
         id='quantity'
         type='number'
-        className='w-14 mx-0.5 py-[7px] text-center bg-gray-100 border-transparent quantity-input'
+        className='w-12 mx-0.5 py-[3px] text-center bg-gray-100 border-transparent quantity-input'
         placeholder='1'
         min='1'
         value={value}
@@ -36,7 +36,7 @@ export const Quantity = ({
       <button
         type='button'
         onClick={() => addQuantity()}
-        className='px-3 py-2 bg-gray-200 rounded-r-md hover:bg-gray-300'
+        className='px-3 py-1 bg-gray-200 rounded-r-md hover:bg-gray-300'
       >
         +
       </button>
