@@ -1,13 +1,13 @@
 export const mailtoDetailProduct = product => {
-  let parsedDescription = product.description.replace(/<[^>]*>?/gm, '')
-
   return `mailto:diprofire@diprofire.cl
-    ?subject=Detalle de producto ${product.name}
-    &body=Hola, me gustaría recibir más información sobre el producto ${product.name}.
+    ?subject=Cotización de ${product.name}
+    &body=Hola, me gustaría cotizar.
     %0D%0A%0D%0A
-    Descripción: "${parsedDescription}"
+    Producto: ${product.name}
     %0D%0A%0D%0A
-    Código/NP: ${product.sku}
+    Modelo: ${product.sku}
+    %0D%0A%0D%0A
+    Marca: ${product.brand}
     %0D%0A%0D%0A
     Cantidad: ${product.quantity}
   `
@@ -17,13 +17,13 @@ export const mailtoCartProducts = cart => {
   let body = cart.reduce((acc, item) => {
     return `${acc}
       %0D%0A%0D%0A
-      ${item.name} (Código/NP: ${item.sku}) - ${item.quantity} unidad(es)
+      - ${item.name} (Modelo: ${item.sku}, Marca: ${item.brand}) - ${item.quantity} unidad(es)
     `
   }, '')
 
   return `mailto:
-    ?subject=Productos en carrito de cotizaciones
-    &body=Hola, me gustaría recibir más información sobre los siguientes productos:
+    ?subject=Cotización de productos
+    &body=Hola, me gustaría cotizar los siguientes productos:
     ${body}
   `
 }

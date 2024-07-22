@@ -98,13 +98,15 @@ export const GalleryProducts = () => {
           {searchTerm && searchResults.length > 0 ? (
             <ul className='w-full mx-auto px-4 sm:px-10 gap-10 gap-y-8 flex flex-wrap justify-center lg:justify-start'>
               {searchResults.map(
-                ({ objectID, post_title, permalink, slug, images }) => (
+                ({ objectID, post_id, post_title, images, post_excerpt, taxonomies }) => (
                   <CardProduct
                     key={objectID}
-                    url={permalink || `/productos/${slug}/`}
+                    id={post_id}
                     name={post_title}
+                    sku={post_excerpt}
                     img={images.thumbnail?.url}
                     alt={`previsualización del producto: ${post_title}`}
+                    brand={taxonomies.product_tag}
                   />
                 )
               )}
@@ -119,13 +121,16 @@ export const GalleryProducts = () => {
               )}
               {products && productList ? (
                 <ul className='w-full mx-auto px-4 sm:px-10 gap-10 gap-y-8 flex flex-wrap justify-center lg:justify-start'>
-                  {productList.map(({ slug, name, images }) => (
+                  {productList.map(({ id, name, description, sku, images, tags }) => (
                     <CardProduct
-                      key={slug}
-                      url={`/productos/${slug}/`}
+                      key={sku}
+                      id={id}
                       name={name}
+                      description={description}
+                      sku={sku}
                       img={images[0]?.src}
-                      alt={images[0]?.alt}
+                      alt={`previsualización del producto: ${name}`}
+                      brand={tags}
                     />
                   ))}
                 </ul>
