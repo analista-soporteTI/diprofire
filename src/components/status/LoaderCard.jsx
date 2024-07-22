@@ -5,7 +5,6 @@ export const LoaderCardSmall = () => {
         <div className='h-44 bg-gray-300 rounded'></div>
         <div className='h-4 bg-gray-300 rounded w-full my-2'></div>
         <div className='h-4 bg-gray-300 rounded w-full my-2'></div>
-        <div className='h-4 bg-gray-300 rounded w-full my-2'></div>
       </div>
     </div>
   )
