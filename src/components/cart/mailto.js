@@ -17,11 +17,11 @@ export const mailtoCartProducts = cart => {
   let body = cart.reduce((acc, item) => {
     return `${acc}
       %0D%0A%0D%0A
-      - ${item.name} (Modelo: ${item.sku}, Marca: ${item.brand}) - ${item.quantity} unidad(es)
+      - ${item.name} - Modelo: ${item.sku} - Marca: ${item.brand} - ${item.quantity} unidad(es)
     `
   }, '')
 
-  return `mailto:
+  return `mailto:diprofire@diprofire.cl
     ?subject=Cotización de productos
     &body=Hola, me gustaría cotizar los siguientes productos:
     ${body}
