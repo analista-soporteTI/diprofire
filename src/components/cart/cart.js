@@ -31,7 +31,6 @@ export const addToCart = product => {
   }
 
   saveCart(cart)
-  console.log('added to a cart', cart)
 }
 
 export const removeFromCart = productId => {
