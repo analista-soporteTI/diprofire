@@ -20,7 +20,7 @@ export const Aside = ({
               <SearchBar
                 searchTerm={searchTerm}
                 handleSearch={handleSearch}
-                id='searchProducts'
+                id='searchProductsMobile'
               />
             </div>
             <div className='w-full'>
@@ -55,7 +55,7 @@ export const Aside = ({
           <SearchBar
             searchTerm={searchTerm}
             handleSearch={handleSearch}
-            id='searchProducts'
+            id='searchProductsDesktop'
           />
           <h3 className='mb-4 mt-10 font-semibold'>Categorías</h3>
           <ul>
