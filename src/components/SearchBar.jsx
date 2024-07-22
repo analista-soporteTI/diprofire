@@ -2,7 +2,7 @@ import { SearchIcon } from '@icons/Search.jsx'
 
 export const SearchBar = ({
   className = '',
-  id = 'searchbar',
+  id = '',
   searchTerm,
   handleSearch
 }) => {
