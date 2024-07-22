@@ -66,32 +66,38 @@ export const CartUI = () => {
           <p className='col-span-1 max-sm:hidden'>Cantidad</p>
         </div>
         <div>
-          <ul>
+          <ul className='space-y-4 max-sm:space-y-10'>
             {cart.map(item => (
               <li
                 key={item.name}
-                className='first:mt-0 last:mb-0 my-4 grid sm:grid-cols-1 md:grid-cols-3 gap-4 items-center'
+                className='first:mt-0 last:mb-0 grid sm:grid-cols-3 gap-4 items-center max-sm:peer-even:bg-gray-900'
               >
-                <div className='flex items-center gap-4 col-span-2 sm:col-span-1 md:col-span-2 flex-wrap'>
-                  <button
-                    onClick={() => handleRemoveFromCart(item.id)}
-                    className='hover:opacity-70'
-                  >
-                    ❌
-                  </button>
-                  <img
-                    src={item.image}
-                    alt={`Previsualización del producto: ${item.name}`}
-                    className='max-w-[40px] sm:max-w-[60px] md:max-w-[40px] rounded-md'
-                  />
+                <div className='flex max-[400px]:flex-col max-sm:items-start items-center gap-4 sm:col-span-2'>
+                  <div className='flex gap-4'>
+                    <button
+                      onClick={() => handleRemoveFromCart(item.id)}
+                      className='hover:opacity-70'
+                      title={`Eliminar ${item.name} del carrito`}
+                    >
+                      ❌
+                    </button>
+                    <img
+                      src={item.img}
+                      alt={`Previsualización del producto: ${item.name}`}
+                      className='max-w-[80px] rounded-md'
+                    />
+                  </div>
                   <div>
-                    <p className='w-fit block'>{item.name}</p>
-                    <p className='w-fit block'>{`Código/NP: ${item.sku}`}</p>
+                    <p className='w-fit block text-sm font-semibold'>
+                      {item.name}
+                    </p>
+                    <p className='w-fit block text-sm border-t border-zinc-300 pt-1 mt-1'>{`Modelo: ${item.sku}`}</p>
+                    <p className='w-fit block text-sm'>{`Marca: ${item.brand}`}</p>
                   </div>
                 </div>
                 <Quantity
                   key={item.id}
-                  className='col-span-1 sm:col-span-1 md:col-span-1'
+                  className='col-span-1 max-sm:mr-auto'
                   value={item.quantity}
                   addQuantity={() => handleAddToCart(item)}
                   subQuantity={() =>
@@ -114,6 +120,7 @@ export const CartUI = () => {
         <ButtonCartSecondary
           disabled={cart.length === 0}
           onClick={() => handleClearCart()}
+          className='hover:bg-transparent border-transparent hover:border-red-600 text-red-600 hover:text-red-600'
         >
           Borrar cotizaciones
         </ButtonCartSecondary>
