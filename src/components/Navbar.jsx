@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { CartIcon } from '@icons/Cart.jsx'
 import { getCart } from '@components/cart/cart.js'
 import { CloseIcon } from '@icons/Close'
@@ -8,6 +8,7 @@ export const Navbar = () => {
   const [scrolling, setScrolling] = useState(false)
   const [counterCart, setCounterCart] = useState(getCart().length || 0)
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,10 +36,23 @@ export const Navbar = () => {
   const msgCart =
     counterCart > 1 || counterCart === 0 ? 'cotizaciones' : 'cotización'
 
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [menuRef])
+
   return (
     <header
       className={`z-50 fixed w-full transition-all duration-200 bg-gray-100 border-b border-gray-300 text-black ${
-        scrolling || window.location.pathname !== '/'
+        menuOpen || scrolling || window.location.pathname !== '/'
           ? '!bg-gray-100 !border-gray-300 !text-black'
           : '!bg-transparent !border-transparent !text-white'
       }`}
@@ -99,7 +113,7 @@ export const Navbar = () => {
             ) : (
               <MenuIcon
                 className={`size-8 bg-black rounded-full p-2 ${
-                  scrolling || window.location.pathname !== '/'
+                  menuOpen || scrolling || window.location.pathname !== '/'
                     ? '!bg-black !text-white'
                     : '!bg-white !text-black'
                 }`}
@@ -119,11 +133,12 @@ export const Navbar = () => {
       </div>
       {menuOpen && (
         <nav
+          ref={menuRef}
           className={`min-[900px]:hidden ${
-            menuOpen ? 'block' : 'hidden'
-          } w-full bg-gray-100 text-black border-t border-gray-300 fixed top-16 left-0 z-50 transition-all duration-200}`}
+            menuOpen ? 'block' : scrolling ? '' : 'hidden'
+          } w-full max-w-[200px] h-dvh px-10 border-r shadow-md bg-gray-100 text-black border-t border-gray-300 fixed top-16 left-0 z-50 transition-all duration-200`}
         >
-          <ul className='flex flex-col items-center gap-6 text-base py-4'>
+          <ul className='flex flex-col items-start gap-6 text-base py-4 [&>li]:w-full [&>li>a]:block [&>li>a:hover]:text-green-600'>
             <li>
               <a href='/' onClick={() => setMenuOpen(false)}>
                 Inicio
