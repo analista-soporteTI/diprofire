@@ -7,7 +7,7 @@ export const CardProduct = ({ id, name, sku, img, alt, brand }) => {
   const product = {
     id: id,
     name: name,
-    sku: sku,
+    sku: format_sku,
     img: img,
     brand: new_array_brand || brand.product_tag
   }
