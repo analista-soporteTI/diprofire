@@ -1,4 +1,4 @@
-import { ProductDetailAction } from './ProductDetailAction'
+import { ProductDetailAction } from '@components/products/ProductDetailAction'
 
 export const CardProduct = ({ id, name, sku, img, alt, brand }) => {
   const new_array_brand = brand.map(item => item.name).join(', ') || brand
