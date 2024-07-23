@@ -1,4 +1,5 @@
 export const STATUS = Object.freeze({
   ERROR: 'error',
-  SUCCESS: 'success'
+  SUCCESS: 'success',
+  INFO: 'information'
 })

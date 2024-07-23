@@ -1,6 +1,7 @@
 import { ErrorIcon } from '@icons/status/Error'
 import { SuccessIcon } from '@icons/status/Sucess'
 import { STATUS } from '@consts/status'
+import { InfoIcon } from '@icons/status/Info'
 
 export const StatusMessage = ({
   message,
@@ -15,6 +16,8 @@ export const StatusMessage = ({
           <div>
             {type === 'success' ? (
               <SuccessIcon className='w-6 h-6 text-green-600' />
+            ) : type === 'information' ? (
+              <InfoIcon className='w-6 h-6 text-blue-600' />
             ) : (
               <ErrorIcon className='w-6 h-6 text-red-600' />
             )}
