@@ -11,6 +11,7 @@ interface ImportMetaEnv {
 
   readonly PUBLIC_ALGOLIA_APP_ID
   readonly PUBLIC_ALGOLIA_SEARCH_KEY
+  readonly PUBLIC_ALGOLIA_INDEX_NAME
 }
 
 interface ImportMeta {
