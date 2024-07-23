@@ -1,154 +1,104 @@
-import { useEffect, useState } from 'react'
-import { getCategories, getProducts } from 'src/api/apiWoocomerce'
-import useSWR from 'swr'
-import useProductStore from '@hooks/storeProducts'
-import useCategoryStore from '@hooks/storeCategories'
-import { Aside } from '@components/products/Aside'
-import { AsideLoader } from '@components/status/AsideLoader'
-import { CardProduct } from '@components/products/CardProduct'
-import { LoaderCardSmall } from '@components/status/LoaderCard'
-import { StatusMessage } from '@components/status/StatusMessage'
+import { useRef, useEffect } from 'react'
+import {
+  InstantSearch,
+  SearchBox,
+  Configure,
+  useInfiniteHits
+} from 'react-instantsearch'
 import algoliasearch from 'algoliasearch/lite'
+import { CardProduct } from '@components/products/CardProduct'
+import { StatusMessage } from '@components/status/StatusMessage'
+import { STATUS } from '@consts/status'
+import "@styles/gallery-products.css"
 
 const appId = import.meta.env.PUBLIC_ALGOLIA_APP_ID
 const searchKey = import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY
+const indexName = import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME
 
 const searchClient = algoliasearch(appId, searchKey)
-const index = searchClient.initIndex('wp_posts_product')
 
-export const GalleryProducts = () => {
-  const { data: categories, error: errorCategories } = useSWR(
-    'categories',
-    getCategories
-  )
+const Hit = ({ hit }) => (
+  <CardProduct
+    id={hit.post_id}
+    name={hit.post_title}
+    sku={hit.post_excerpt}
+    img={hit.images.thumbnail.url || ''}
+    alt={`previsualización del producto: ${hit.post_title}`}
+    brand={hit.taxonomies.product_tag || []}
+  />
+)
 
-  const { data: products, error: errorProducts } = useSWR(
-    'products',
-    getProducts,
-    {
-      onLoadingSlow: () => <LoaderCardSmall />,
-      onSuccess: data => {
-        addProductList(data)
-      }
-    }
-  )
-
-  const listCategories = useCategoryStore(state => state.categories)
-  const setCategories = useCategoryStore(state => state.setCategories)
-  const productList = useProductStore(state => state.products)
-  const addProductList = useProductStore(state => state.addProducts)
-  const setProductList = useProductStore(state => state.setProducts)
-
+const CustomInfiniteHits = (props) => {
+  const { hits, isLastPage, showMore } = useInfiniteHits(props);
+  const sentinelRef = useRef(null);
+  
   useEffect(() => {
-    if (categories) {
-      const filterCategories = categories.filter(
-        category => category.name !== 'Sin categorizar'
-      )
-      setCategories(filterCategories)
+    if (sentinelRef.current !== null) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isLastPage) {
+            showMore();
+          }
+        });
+      });
+
+      observer.observe(sentinelRef.current);
+
+      return () => {
+        observer.disconnect();
+      };
     }
-  }, [categories])
-
-  const handleCategories = category => {
-    if (category === '') {
-      setProductList(products)
-    } else {
-      const filtered = products?.filter(product =>
-        product.categories.some(cat => cat.name === category)
-      )
-      setProductList(filtered)
-    }
-  }
-
-  const [searchTerm, setSearchTerm] = useState('')
-  const [searchResults, setSearchResults] = useState([])
-
-  const handleSearch = async event => {
-    const { value } = event.target
-    setSearchTerm(value)
-
-    if (value.trim() !== '') {
-      try {
-        const results = await index.search(value)
-        setSearchResults(results.hits)
-      } catch (error) {
-        console.error('Error searching Algolia:', error)
-      }
-    } else {
-      setSearchResults([])
-    }
-  }
+  }, [isLastPage, showMore]);
 
   return (
-    <div className='flex flex-col justify-center lg:flex-row lg:justify-start gap-10'>
-      {!categories && !listCategories && <AsideLoader />}
-      {listCategories && (
-        <Aside
-          handleCategories={handleCategories}
-          categories={listCategories}
-          errorCategories={errorCategories}
-          searchTerm={searchTerm}
-          handleSearch={handleSearch}
+    <div className='ais-InfiniteHits'>
+      <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6'>
+        {hits.map(hit => (
+          <li key={hit.objectID} className='flex flex-col'>
+            <Hit hit={hit} />
+          </li>
+        ))}
+        <li ref={sentinelRef} aria-hidden='true' />
+      </ul>
+      {isLastPage && hits.length > 0 && (
+        <StatusMessage
+          type={STATUS.SUCCESS}
+          message='¡Ya has visto todos los productos!'
+          className='w-fit mx-auto mt-10'
         />
       )}
-      <main className='pt-10 lg:pt-24 pb-10 z-10'>
-        <section className='w-full'>
-          <h1 className='mb-10 text-3xl font-bold text-center lg:text-start px-4 sm:px-10'>
-            Todos nuestros productos
-          </h1>
-          {searchTerm && searchResults.length > 0 ? (
-            <ul className='w-full mx-auto px-4 sm:px-10 gap-10 gap-y-8 flex flex-wrap justify-center lg:justify-start'>
-              {searchResults.map(
-                ({ objectID, post_id, post_title, images, post_excerpt, taxonomies }) => (
-                  <CardProduct
-                    key={objectID}
-                    id={post_id}
-                    name={post_title}
-                    sku={post_excerpt}
-                    img={images.thumbnail?.url}
-                    alt={`previsualización del producto: ${post_title}`}
-                    brand={taxonomies.product_tag}
-                  />
-                )
-              )}
-            </ul>
-          ) : (
-            <>
-              {errorProducts && (
-                <StatusMessage
-                  message='Error al cargar los productos'
-                  className='w-fit mx-auto mb-10'
-                />
-              )}
-              {products && productList ? (
-                <ul className='w-full mx-auto px-4 sm:px-10 gap-10 gap-y-8 flex flex-wrap justify-center lg:justify-start'>
-                  {productList.map(({ id, name, description, sku, images, tags }) => (
-                    <CardProduct
-                      key={sku}
-                      id={id}
-                      name={name}
-                      description={description}
-                      sku={sku}
-                      img={images[0]?.src}
-                      alt={`previsualización del producto: ${name}`}
-                      brand={tags}
-                    />
-                  ))}
-                </ul>
-              ) : (
-                <ul className='w-full mx-auto px-4 sm:px-10 gap-10 gap-y-8 flex flex-wrap justify-center lg:justify-start'>
-                  <LoaderCardSmall />
-                  <LoaderCardSmall />
-                  <LoaderCardSmall />
-                  <LoaderCardSmall />
-                  <LoaderCardSmall />
-                  <LoaderCardSmall />
-                  <LoaderCardSmall />
-                  <LoaderCardSmall />
-                </ul>
-              )}
-            </>
-          )}
-        </section>
+      {hits.length === 0 && (
+        <StatusMessage
+          type={STATUS.ERROR}
+          message='No se encontraron productos'
+          className='w-fit mx-auto mt-10'
+        />
+      )}
+    </div>
+  )
+}
+
+export const GalleryProducts = () => {
+  return (
+    <div className='flex flex-col items-center lg:items-start gap-10 px-4 sm:px-10 max-[1024px]:pt-20'>
+      <main className='pt-10 lg:pt-24 pb-10 z-10 w-full'>
+        <h1 className='text-3xl font-bold text-start mb-4'>
+          Todos nuestros productos
+        </h1>
+        <div className='mb-6'>
+          <InstantSearch
+            indexName={indexName}
+            searchClient={searchClient}
+          >
+            <SearchBox
+              translations={{ placeholder: 'Buscar productos...' }}
+              className='w-full max-w-md mb-16'
+              placeholder='Buscar productos...'
+            />
+            <Configure />
+            <CustomInfiniteHits />
+          </InstantSearch>
+        </div>
       </main>
     </div>
   )
