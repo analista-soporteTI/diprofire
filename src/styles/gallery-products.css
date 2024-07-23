@@ -1,0 +1,81 @@
+.ais-SearchBox-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.ais-SearchBox-input:focus {
+  border-color: #16a34a;
+}
+
+.ais-SearchBox-reset {
+  display: none;
+}
+
+.ais-SearchBox-submit {
+  display: none;
+}
+
+.ais-RefinementList-list {
+  list-style: none;
+  padding: 0;
+}
+
+.ais-RefinementList-item {
+  width: fit-content;
+  margin: 1rem 0;
+}
+
+.ais-RefinementList-checkbox {
+  margin-right: 0.5rem;
+}
+
+.ais-RefinementList-checkbox:focus {
+  outline: 2px solid #16a34a;
+}
+
+.ais-RefinementList-count {
+  display: none;
+}
+
+.ais-RefinementList-label {
+  padding: 0.2rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: #e4e4e7;
+}
+
+.ais-RefinementList-label:hover {
+  color: #16a34a;
+}
+
+.ais-RefinementList-label--selected {
+  font-weight: bold;
+  color: #16a34a;
+}
+
+.ais-ClearRefinements {
+  margin: 1rem 0;
+}
+
+.ais-ClearRefinements-button {
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.ais-ClearRefinements-button--disabled {
+  background-color: #c0c0c0;
+  cursor: not-allowed;
+}
+
+.ais-ClearRefinements-button:hover:not(.ais-ClearRefinements-button--disabled) {
+  background-color: #15803d;
+}
