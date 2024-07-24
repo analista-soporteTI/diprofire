@@ -5,13 +5,15 @@ import {
   Configure,
   useInfiniteHits,
   RefinementList,
-  ClearRefinements
+  ClearRefinements,
+  useSearchBox
 } from 'react-instantsearch'
 import algoliasearch from 'algoliasearch/lite'
 import { CardProduct } from '@components/products/CardProduct'
 import { StatusMessage } from '@components/status/StatusMessage'
 import { STATUS } from '@consts/status'
 import '@styles/gallery-products.css'
+import algoliaLogo from '@assets/Algolia-mark-blue.svg'
 
 const appId = import.meta.env.PUBLIC_ALGOLIA_APP_ID
 const searchKey = import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY
@@ -24,7 +26,7 @@ const Hit = ({ hit }) => (
     id={hit.post_id}
     name={hit.post_title}
     sku={hit.post_excerpt}
-    img={hit.images.thumbnail.url || ''}
+    img={hit.images.thumbnail.url || null}
     alt={`previsualización del producto: ${hit.post_title}`}
     brand={hit.taxonomies.product_tag || []}
   />
@@ -80,6 +82,32 @@ const CustomInfiniteHits = () => {
   )
 }
 
+const CustomSearchBox = () => {
+  const { query, refine } = useSearchBox()
+
+  return (
+    <label
+      htmlFor='customSearchAlgolia'
+      className='flex w-full gap-4 items-center border border-green-600 rounded-md px-2'
+    >
+      <img
+        src={algoliaLogo.src}
+        alt='Logo de Algolia'
+        className='object-contain size-5'
+      />
+      <input
+        id='customSearchAlgolia'
+        type='search'
+        value={query}
+        onChange={e => refine(e.currentTarget.value)}
+        placeholder='Buscar productos...'
+        className='search-input w-full bg-transparent outline-none focus:ring-0 py-2'
+        autoComplete='off'
+      />
+    </label>
+  )
+}
+
 export const GalleryProducts = () => {
   return (
     <main className='pt-10 lg:pt-24 pb-10 z-10 w-full gap-10 px-4 sm:px-10 max-[1024px]:pt-20 max-w-7xl mx-auto'>
@@ -90,12 +118,7 @@ export const GalleryProducts = () => {
         <InstantSearch indexName={indexName} searchClient={searchClient}>
           <div className='border-b border-zinc-300 mb-10 pb-10 flex flex-wrap gap-6 lg:gap-10 xl:gap-20'>
             <div className='w-full max-w-md'>
-              <h2 className='mb-2'>Buscar productos</h2>
-              <SearchBox
-                id='searchProducts'
-                className='w-full'
-                placeholder='Nombre, sku, marca, etc...'
-              />
+              <CustomSearchBox />
               <ClearRefinements
                 excludedAttributes={[]}
                 translations={{
