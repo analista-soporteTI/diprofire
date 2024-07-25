@@ -1,4 +1,5 @@
 import { ProductDetailAction } from '@components/products/ProductDetailAction'
+import { NoImageIcon } from '@icons/NoImage'
 
 export const CardProduct = ({ id, name, sku, img, alt, brand }) => {
   const new_array_brand = brand.map(item => item.name).join(', ') || brand
@@ -14,11 +15,15 @@ export const CardProduct = ({ id, name, sku, img, alt, brand }) => {
 
   return (
     <article className='group block w-[200px] rounded-lg min-h-[400px]'>
-      <img
-        src={img}
-        alt={alt}
-        className='aspect-square w-full rounded object-cover border-2 border-zinc-200 shadow-sm'
-      />
+      {img ? (
+        <img
+          src={img}
+          alt={alt}
+          className='aspect-square w-full rounded object-cover border-2 border-zinc-200 shadow-sm'
+        />
+      ) : (
+        <NoImageIcon className='size-48 opacity-70' />
+      )}
       <div className='mt-3 flex flex-col justify-evenly'>
         <h3 className='font-medium text-base text-gray-900 pb-1 mb-1 border-b border-zinc-300'>
           {name}
