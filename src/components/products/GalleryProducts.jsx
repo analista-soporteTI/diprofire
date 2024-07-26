@@ -26,7 +26,7 @@ const Hit = ({ hit }) => (
     id={hit.post_id}
     name={hit.post_title}
     sku={hit.post_excerpt}
-    img={hit.images.thumbnail.url || null}
+    img={hit.images.thumbnail ? hit.images.thumbnail.url : null}
     alt={`previsualización del producto: ${hit.post_title}`}
     brand={hit.taxonomies.product_tag || []}
   />
