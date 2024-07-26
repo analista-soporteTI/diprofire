@@ -1,5 +1,5 @@
 import { ProductDetailAction } from '@components/products/ProductDetailAction'
-import { NoImageIcon } from '@icons/NoImage'
+import notFoundImg from '@assets/products/not found.png'
 
 export const CardProduct = ({ id, name, sku, img, alt, brand }) => {
   const new_array_brand = brand.map(item => item.name).join(', ') || brand
@@ -14,15 +14,19 @@ export const CardProduct = ({ id, name, sku, img, alt, brand }) => {
   }
 
   return (
-    <article className='group block w-[200px] rounded-lg min-h-[400px]'>
+    <article className='group block w-[200px] rounded-lg min-h-[450px]'>
       {img ? (
         <img
           src={img}
           alt={alt}
-          className='aspect-square w-full rounded object-cover border-2 border-zinc-200 shadow-sm'
+          className='aspect-square w-full rounded object-contain border-2 border-zinc-200 shadow-sm bg-white'
         />
       ) : (
-        <NoImageIcon className='size-48 opacity-70' />
+        <img
+          src={notFoundImg.src}
+          alt={alt}
+          className='aspect-square w-full rounded object-cover border-2 border-zinc-200 shadow-sm bg-white'
+        />
       )}
       <div className='mt-3 flex flex-col justify-evenly'>
         <h3 className='font-medium text-base text-gray-900 pb-1 mb-1 border-b border-zinc-300'>

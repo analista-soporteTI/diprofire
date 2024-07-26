@@ -14,6 +14,7 @@ import {
 } from '@components/cart/cart.js'
 import { ImportantIcon } from '@icons/Important'
 import { mailtoCartProducts } from '@components/cart/mailto.js'
+import notFoundImg from '@assets/products/not found.png'
 
 export const CartUI = () => {
   const [cart, setCart] = useState(getCart() || [])
@@ -81,17 +82,25 @@ export const CartUI = () => {
                     >
                       ❌
                     </button>
-                    <img
-                      src={item.img}
-                      alt={`Previsualización del producto: ${item.name}`}
-                      className='max-w-[80px] rounded-md'
-                    />
+                    {item.img ? (
+                      <img
+                        src={item.img}
+                        alt={`Previsualización del producto: ${item.name}`}
+                        className='max-w-[80px] rounded-md aspect-square'
+                      />
+                    ) : (
+                      <img
+                        src={notFoundImg.src}
+                        alt={`Imagen de producto sin previsualización`}
+                        className='max-w-[80px] rounded-md aspect-square bg-white'
+                      />
+                    )}
                   </div>
                   <div>
                     <p className='w-fit block text-sm font-semibold'>
                       {item.name}
                     </p>
-                    <p className='w-fit block text-sm border-t border-zinc-300 pt-1 mt-1'>{`Modelo: ${item.sku}`}</p>
+                    <p className='w-fit block text-sm border-t border-zinc-300 pt-1 mt-1'>{`SKU: ${item.sku}`}</p>
                     <p className='w-fit block text-sm'>{`Marca: ${item.brand}`}</p>
                   </div>
                 </div>
