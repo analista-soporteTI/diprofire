@@ -14,8 +14,10 @@ export async function getStaticPaths() {
   try {
     const response = await getProducts()
 
-    const paths = response.map(product => ({
-      params: { id: product.id.toString() }
+    const paths = response.map((product: { id: { toString: () => any; }; }) => ({
+      params: { 
+        id: product.id.toString()
+      }
     }))
 
     return paths
