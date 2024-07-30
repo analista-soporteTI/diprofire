@@ -14,6 +14,7 @@ import { StatusMessage } from '@components/status/StatusMessage'
 import { STATUS } from '@consts/status'
 import '@styles/gallery-products.css'
 import algoliaLogo from '@assets/Algolia-mark-blue.svg'
+import { ButtonUp } from '@components/buttons/ButtonUp'
 
 const appId = import.meta.env.PUBLIC_ALGOLIA_APP_ID
 const searchKey = import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY
@@ -26,9 +27,10 @@ const Hit = ({ hit }) => (
     id={hit.post_id}
     name={hit.post_title}
     sku={hit.post_excerpt}
-    img={hit.images.thumbnail ? hit.images.thumbnail.url : null}
+    img={hit.images.thumbnail ? hit.images : null}
     alt={`previsualización del producto: ${hit.post_title}`}
     brand={hit.taxonomies.product_tag || []}
+    description={hit.content}
   />
 )
 
@@ -56,7 +58,7 @@ const CustomInfiniteHits = () => {
 
   return (
     <div className='ais-InfiniteHits'>
-      <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6'>
+      <ul className='grid grid-cols-1 min-[374px]:grid-cols-2 min-[580px]:grid-cols-3 min-[900px]:grid-cols-4 min-[1000px]:grid-cols-5 gap-6'>
         {hits.map(hit => (
           <li key={hit.objectID} className='flex flex-col'>
             <Hit hit={hit} />
@@ -74,7 +76,7 @@ const CustomInfiniteHits = () => {
       {hits.length === 0 && (
         <StatusMessage
           type={STATUS.INFO}
-          message='No hay coincidencias con tu búsqueda'
+          message='No hay productos para mostrar'
           className='w-fit mt-10'
         />
       )}
@@ -111,10 +113,10 @@ const CustomSearchBox = () => {
 export const GalleryProducts = () => {
   return (
     <main className='pt-10 lg:pt-24 pb-10 z-10 w-full gap-10 px-4 sm:px-10 max-[1024px]:pt-20 max-w-7xl mx-auto'>
-      <h1 className='text-3xl font-bold text-start mb-6'>
+      <h1 id='titleGallery' className='text-3xl font-bold text-start mb-6'>
         Todos <span className='text-green-600'>nuestros productos</span>
       </h1>
-      <div className='mb-6'>
+      <div className='mb-6 relative'>
         <InstantSearch indexName={indexName} searchClient={searchClient}>
           <div className='border-b border-zinc-300 mb-10 pb-10 flex flex-wrap gap-6 lg:gap-10 xl:gap-20'>
             <div className='w-full max-w-md'>
@@ -140,6 +142,7 @@ export const GalleryProducts = () => {
           <Configure />
           <CustomInfiniteHits />
         </InstantSearch>
+        <ButtonUp href='#titleGallery' />
       </div>
     </main>
   )
