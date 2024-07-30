@@ -1,4 +1,5 @@
 import axios from 'axios'
+import useProductsStore from '@hooks/storeProducts'
 
 const publicKey = import.meta.env.PUBLIC_WC_READ_KEY
 const passwordKey = import.meta.env.PUBLIC_WC_READ_PASSWORD
@@ -20,31 +21,43 @@ const endpoints_wc = {
   PRODUCTS_TAGS: `${API_WC}/products/tags`
 }
 
+const fetchProductsFromAPI = async () => {
+  let allProducts = []
+  let page = 1
+  let perPage = 100
+  let totalProducts = 0
+
+  do {
+    const response = await FETCH_API_WC.get(endpoints_wc.PRODUCTS, {
+      params: {
+        per_page: perPage,
+        page: page
+      }
+    })
+
+    const products = response.data
+    totalProducts = parseInt(response.headers['x-wp-total'], 10)
+
+    const filteredProducts = products.map(product => ({
+      id: product.id,
+      name: product.name,
+      categories: product.categories,
+      tags: product.tags,
+      images: product.images,
+      description: product.description,
+      short_description: product.short_description,
+      sku: product.sku
+    }))
+
+    allProducts = [...allProducts, ...filteredProducts]
+
+    page++
+  } while (allProducts.length < totalProducts)
+
+  return allProducts
+}
+
 export const getProducts = async () => {
-  try {
-    let allProducts = []
-    let page = 1
-    let perPage = 100
-    let totalProducts = 0
-
-    do {
-      const response = await FETCH_API_WC.get(endpoints_wc.PRODUCTS, {
-        params: {
-          per_page: perPage,
-          page: page
-        }
-      })
-
-      const products = response.data
-      totalProducts = parseInt(response.headers['x-wp-total'], 10)
-      allProducts = [...allProducts, ...products]
-
-      page++
-    } while (allProducts.length < totalProducts)
-
-    return allProducts
-  } catch (error) {
-    console.error('Error fetching products:', error)
-    throw error
-  }
+  const store = useProductsStore.getState()
+  return store.getProducts(fetchProductsFromAPI)
 }

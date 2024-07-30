@@ -1,24 +1,27 @@
 import { create } from 'zustand'
 
-const useProductStore = create(set => ({
-  products: [],
-  setProducts: products => {
-    set({ products })
-  },
-  addProducts: newProducts =>
-    set(state => {
-      const existingProductSlugs = new Set(
-        state.products.map(product => product.slug)
-      )
+const CACHE_DURATION_MS = 90000000 // 25 horas
 
-      const filteredNewProducts = newProducts.filter(
-        product => !existingProductSlugs.has(product.slug)
-      )
+const useProductsStore = create((set) => ({
+  products: null,
+  lastFetchedTime: null,
+  setProducts: (products) => set({ products, lastFetchedTime: Date.now() }),
+  getProducts: async (fetchProducts) => {
+    const state = useProductsStore.getState()
 
-      return {
-        products: [...state.products, ...filteredNewProducts]
-      }
-    })
+    if (state.products && state.lastFetchedTime && (Date.now() - state.lastFetchedTime) < CACHE_DURATION_MS) {
+      return state.products
+    }
+
+    try {
+      const products = await fetchProducts()
+      set({ products, lastFetchedTime: Date.now() })
+      return products
+    } catch (error) {
+      console.error('Error fetching products:', error)
+      throw error
+    }
+  }
 }))
 
-export default useProductStore
+export default useProductsStore
