@@ -23,7 +23,7 @@ const { title, description } = Astro.props;
 		<meta name="description" content={description} />
 	</head>
 	<body class="bg-zinc-100 text-zinc-900">
-		<Navbar client:only />
+		<Navbar client:only="react" />
 		<slot />
 		<Footer />
 	</body>
