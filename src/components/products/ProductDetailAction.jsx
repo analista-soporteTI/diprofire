@@ -44,7 +44,7 @@ export const ProductDetailAction = ({ product }) => {
   }, [product])
 
   return (
-    <div className='flex flex-wrap gap-2 mt-2'>
+    <div className='flex flex-wrap gap-2 mt-2 items-center'>
       <div>
         <div>
           <button
