@@ -6,20 +6,37 @@ import { ProductDetailAction } from "@components/products/ProductDetailAction";
 import notFoundImg from "@assets/products/not found.png";
 import { Image } from "astro:assets";
 
+export const prerender = true;
+
 const { id } = Astro.params;
 
-const products = await getProducts();
+export async function getStaticPaths() {
+  try {
+    const response = await getProducts()
 
-const findProduct = products.find((product: any) => product.id == id);
+    const paths = response.map(product => ({
+      params: { id: product.id.toString() }
+    }))
 
-const { name, images, description, sku, tags, categories } = findProduct;
+    return paths
+  } catch (error) {
+    console.error('Error fetching products:', error)
+    throw error
+  }
+}
 
-const parsed_description = description.replace(/<[^>]*>?/gm, "");
+async function fetchProducts() {
+  const products = await getProducts();
+  const findProduct = products.find((product: any) => product.id == id);
+  return findProduct;
+}
+
+const { name, images, description, sku, tags, categories } = await fetchProducts();
 
 const parsedProduct = {
   id: id,
   name: name,
-  description: parsed_description,
+  description: description.replace(/<[^>]*>?/gm, ""),
   sku: sku,
   brand: tags[0]?.name,
   img: images[0] ? images[0].src : null,
@@ -48,10 +65,10 @@ const parsedProduct = {
             {name}
           </h1>
           {
-            parsed_description === "" ? (
+            description === "" ? (
               <p class="opacity-80">Sin descripción</p>
             ) : (
-              <p>{parsed_description}</p>
+              <p>{description.replace(/<[^>]*>?/gm, "")}</p>
             )
           }
           <div class="my-6">
