@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react'
 import {
   InstantSearch,
-  SearchBox,
   Configure,
   useInfiniteHits,
   RefinementList,
