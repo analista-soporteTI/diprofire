@@ -1,0 +1,28 @@
+name: Redeploy to Cloudflare Pages
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Ejecutar diariamente a medianoche
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Touch a file to trigger build
+        run: touch trigger.txt
+        
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git commit -m "Trigger redeploy"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.REDEPLOY_CLOUDFLARE_PAGES }}
+
