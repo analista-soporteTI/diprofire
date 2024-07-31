@@ -1,5 +1,5 @@
-const axios = require('axios')
-const algoliasearch = require('algoliasearch')
+import axios from 'axios'
+import algoliasearch from 'algoliasearch'
 import useProductsStore from '@hooks/storeProducts'
 
 const publicKey = import.meta.env.PUBLIC_WC_READ_KEY
