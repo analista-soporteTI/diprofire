@@ -23,9 +23,9 @@ jobs:
         git add timestamp.txt
         git commit -m "Auto-update timestamp"
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.RE_DEPLOY }}
 
     - name: Push changes
       run: git push
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.RE_DEPLOY }}
