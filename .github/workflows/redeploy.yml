@@ -1,8 +1,8 @@
-name: Cron Deployment
+name: Cron Re-deployment
 
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 2 * * *'  # Ejecutar a las 2:00 AM UTC cada día
   workflow_dispatch:
 
 permissions:
@@ -15,6 +15,22 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Fetch and Upload Products
+      env:
+        PUBLIC_WC_READ_KEY: ${{ secrets.PUBLIC_WC_READ_KEY }}
+        SECRET_WC_READ_PASSWORD: ${{ secrets.SECRET_WC_READ_PASSWORD }}
+        PUBLIC_ALGOLIA_APP_ID: ${{ secrets.PUBLIC_ALGOLIA_APP_ID }}
+        SECRET_ALGOLIA_ADMIN_KEY: ${{ secrets.SECRET_ALGOLIA_ADMIN_KEY }}
+      run: node updateProducts.js
 
     - name: Update timestamp
       run: |

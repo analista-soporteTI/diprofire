@@ -1,38 +1,40 @@
-import axios from 'axios'
-import useProductsStore from '@hooks/storeProducts'
+const axios = require('axios')
+const algoliasearch = require('algoliasearch')
 
 const publicKey = import.meta.env.PUBLIC_WC_READ_KEY
-const passwordKey = import.meta.env.PUBLIC_WC_READ_PASSWORD
+const passwordKey = import.meta.env.SECRET_WC_READ_PASSWORD
 
-const Authorization = 'Basic ' + btoa(publicKey + ':' + passwordKey)
+const appId = import.meta.env.PUBLIC_ALGOLIA_APP_ID
+const adminKey = import.meta.env.SECRET_ALGOLIA_ADMIN_KEY
+const indexName = import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME
+
+const Authorization =
+  'Basic ' + Buffer.from(publicKey + ':' + passwordKey).toString('base64')
 
 const API_WC = 'https://diprofirechile.wpcomstaging.com/wp-json/wc/v3'
-
 const FETCH_API_WC = axios.create({
   baseURL: API_WC,
-  headers: {
-    Authorization
-  }
+  headers: { Authorization }
 })
-
 const endpoints_wc = {
-  PRODUCTS: `${API_WC}/products?per_page=100`,
-  PRODUCTS_CATEGORIES: `${API_WC}/products/categories`,
-  PRODUCTS_TAGS: `${API_WC}/products/tags`
+  PRODUCTS: `${API_WC}/products`
 }
 
-const fetchProductsFromAPI = async () => {
+const client = algoliasearch(
+  appId,
+  adminKey
+)
+const index = client.initIndex(indexName)
+
+async function fetchProductsFromAPI () {
   let allProducts = []
   let page = 1
-  let perPage = 100
+  const perPage = 100
   let totalProducts = 0
 
   do {
     const response = await FETCH_API_WC.get(endpoints_wc.PRODUCTS, {
-      params: {
-        per_page: perPage,
-        page: page
-      }
+      params: { per_page: perPage, page }
     })
 
     const products = response.data
@@ -50,14 +52,24 @@ const fetchProductsFromAPI = async () => {
     }))
 
     allProducts = [...allProducts, ...filteredProducts]
-
     page++
   } while (allProducts.length < totalProducts)
 
   return allProducts
 }
 
-export const getProducts = async () => {
-  const store = useProductsStore.getState()
-  return store.getProducts(fetchProductsFromAPI)
+async function uploadProductsToAlgolia (products) {
+  try {
+    const { objectIDs } = await index.saveObjects(products, {
+      autoGenerateObjectIDIfNotExist: true
+    })
+    console.log('Products uploaded to Algolia:', objectIDs)
+  } catch (err) {
+    console.error('Error uploading products to Algolia:', err)
+  }
 }
+
+(async () => {
+  const products = await fetchProductsFromAPI()
+  await uploadProductsToAlgolia(products)
+})()
