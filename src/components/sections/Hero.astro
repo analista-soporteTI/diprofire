@@ -1,5 +1,6 @@
 ---
 import video from "@assets/diprofire chile.mp4";
+import poster from "@assets/poster video diprofire chile.jpg";
 ---
 
 <section
@@ -11,7 +12,8 @@ import video from "@assets/diprofire chile.mp4";
       muted
       autoplay
       loop
-      preload="auto"
+      preload="metadata"
+      poster={poster.src}
       class="w-full h-full absolute object-cover aspect-video"
     >
     </video>
