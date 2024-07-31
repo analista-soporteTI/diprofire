@@ -1,28 +1,31 @@
-name: Redeploy to Cloudflare Pages
+name: Cron Re-deployment
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Ejecutar diariamente a medianoche
+    - cron: '0 0 * * *' # Este cron job se ejecutará todos los días a medianoche UTC
 
 jobs:
-  redeploy:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      
-      - name: Touch a file to trigger build
-        run: touch trigger.txt
-        
-      - name: Commit changes
-        run: |
-          git config --local user.email "soporte.ti.diprofire@gmail.com"
-          git config --local user.name "analista-soporteTI"
-          git add -A
-          git commit -m "Redeploy Cloudflare Pages"
+    - name: Checkout Repository
+      uses: actions/checkout@v3
 
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.REDEPLOY_CLOUDFLARE_PAGES }}
+    - name: Update timestamp
+      run: |
+        echo "Last deploy: $(date)" > timestamp.txt
 
+    - name: Commit changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add timestamp.txt
+        git commit -m "Auto-update timestamp"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Push changes
+      run: git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
