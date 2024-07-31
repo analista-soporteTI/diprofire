@@ -2,7 +2,8 @@ name: Cron Deployment
 
 on:
   schedule:
-    - cron: '0 2 * * *' # Este cron job se ejecutará todos los días a medianoche UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
 
 jobs:
   deploy:
