@@ -1,5 +1,6 @@
 const axios = require('axios')
 const algoliasearch = require('algoliasearch')
+import useProductsStore from '@hooks/storeProducts'
 
 const publicKey = import.meta.env.PUBLIC_WC_READ_KEY
 const passwordKey = import.meta.env.SECRET_WC_READ_PASSWORD
@@ -20,10 +21,7 @@ const endpoints_wc = {
   PRODUCTS: `${API_WC}/products`
 }
 
-const client = algoliasearch(
-  appId,
-  adminKey
-)
+const client = algoliasearch(appId, adminKey)
 const index = client.initIndex(indexName)
 
 async function fetchProductsFromAPI () {
@@ -69,7 +67,12 @@ async function uploadProductsToAlgolia (products) {
   }
 }
 
-(async () => {
+export const getProducts = async () => {
+  const store = useProductsStore.getState()
+  return store.getProducts(fetchProductsFromAPI)
+}
+
+;(async () => {
   const products = await fetchProductsFromAPI()
   await uploadProductsToAlgolia(products)
 })()
