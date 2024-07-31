@@ -1,4 +1,4 @@
-name: Cron Re-deployment
+name: Cron Deployment
 
 on:
   schedule:
@@ -22,10 +22,9 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git add timestamp.txt
         git commit -m "Auto-update timestamp"
-      env:
-        GITHUB_TOKEN: ${{ secrets.RE_DEPLOY }}
 
     - name: Push changes
-      run: git push origin main
-      env:
-        GITHUB_TOKEN: ${{ secrets.RE_DEPLOY }}
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.RE_DEPLOY }}
+        branch: main
