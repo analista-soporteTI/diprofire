@@ -16,6 +16,7 @@ import algoliaLogo from '@assets/Algolia-mark-blue.svg'
 import { ButtonUp } from '@components/buttons/ButtonUp'
 
 const appId = import.meta.env.PUBLIC_ALGOLIA_APP_ID
+const adminKey = import.meta.env.SECRET_ALGOLIA_ADMIN_KEY
 const searchKey = import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY
 const indexName = import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME
 

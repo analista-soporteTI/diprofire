@@ -7,7 +7,7 @@ import { STATUS } from '@consts/status.js'
 
 const serviceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID
 const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID
-const publicKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
+const secretKey = import.meta.env.SECRET_EMAILJS_KEY
 
 export const ContactForm = () => {
   const [statusMessage, setStatusMessage] = useState(null)
@@ -43,7 +43,7 @@ export const ContactForm = () => {
     }
 
     emailjs
-      .send(serviceId, templateId, templateParams, publicKey)
+      .send(serviceId, templateId, templateParams, secretKey)
       .then(() => {
         setStatusMessage({
           type: STATUS.SUCCESS,
