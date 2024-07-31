@@ -26,6 +26,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.RE_DEPLOY }}
 
     - name: Push changes
-      run: git push
+      run: git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.RE_DEPLOY }}
