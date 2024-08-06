@@ -4,7 +4,6 @@ import {
   InstantSearch,
   Configure,
   useInfiniteHits,
-  RefinementList,
   ClearRefinements,
   useSearchBox
 } from 'react-instantsearch'
@@ -130,16 +129,6 @@ export const GalleryProducts = () => {
                 }}
               />
             </div>
-            {/* <div className='flex flex-wrap gap-10'>
-              <div>
-                <h2>Filtrar por categorías</h2>
-                <RefinementList attribute='hits._snippetResult.categorias' />
-              </div>
-              <div>
-                <h2>Filtrar por marcas</h2>
-                <RefinementList attribute='marca' />
-              </div>
-            </div> */}
           </div>
           <Configure />
           <CustomInfiniteHits />
