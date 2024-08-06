@@ -2,6 +2,8 @@ import { ButtonBack } from '@components/buttons/ButtonBack'
 import '@styles/detail-project-layout.css'
 import { getProjects } from '@api/apiWordpress'
 
+export const runtime = 'edge'
+
 export default async function ProjectDetail({ params }: any) {
   const allProjects = await getProjects();
   const project = allProjects.find((project: any) => project.slug === params.slug);

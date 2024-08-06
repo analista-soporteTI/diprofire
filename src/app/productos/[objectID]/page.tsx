@@ -7,6 +7,8 @@ import Image from 'next/image'
 import notFoundImg from '@assets/products/not found.png'
 import { StatusMessage } from '@/components/status/StatusMessage'
 
+export const runtime = 'edge'
+
 interface Product {
   objectID: string;
   sku: string;
