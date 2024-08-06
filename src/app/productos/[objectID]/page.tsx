@@ -1,13 +1,11 @@
 import { ButtonBack } from '@/components/buttons/ButtonBack'
 import { ProductDetailAction } from '@/components/products/ProductDetailAction'
-import { getAllProducts } from '@api/apiAlgolia'
+import { getAllProducts } from '@/api/apiAlgolia'
 import { createInfoProduct } from '@hooks/infoProducts'
 
 import Image from 'next/image'
 import notFoundImg from '@assets/products/not found.png'
 import { StatusMessage } from '@/components/status/StatusMessage'
-
-export const runtime = 'edge'
 
 interface Product {
   objectID: string;
