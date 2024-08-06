@@ -1,0 +1,42 @@
+.company-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  animation: company-logo-slide calc(var(--companies) * 3s) linear infinite;
+  -webkit-animation: company-logo-slide calc(var(--companies) * 3s) linear
+    infinite;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+.company-logo {
+  margin: 0;
+  height: 2.8rem;
+  width: max-content;
+  display: block;
+}
+figure {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  unicode-bidi: isolate;
+}
+.company-logo img {
+  height: 100%;
+  width: auto;
+  max-width: 180px;
+  max-height: 100px;
+  object-fit: contain;
+  aspect-ratio: auto 100 / 100;
+}
+
+@keyframes company-logo-slide {
+  100% {
+    transform: translateX(0);
+  }
+  0% {
+    transform: translateX(calc(-100% - 4rem));
+  }
+}

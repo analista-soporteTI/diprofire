@@ -1,0 +1,70 @@
+.section-slider-brands {
+  display: block;
+  unicode-bidi: isolate;
+}
+.company-logo-list {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+}
+.company-logo-list:before {
+  left: 0;
+  top: 0;
+}
+.company-logo-list:after {
+  right: 0;
+  top: 0;
+  transform: rotate(180deg);
+}
+.company-logo-list:after,
+.company-logo-list:before {
+  content: "";
+  height: 112px;
+  position: absolute;
+  width: 200px;
+  z-index: 2;
+}
+.company-logo-slider {
+  height: 50px;
+  display: flex;
+  max-height: 50px;
+  gap: 4rem;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.client-logo-list {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+  padding: 1rem 0;
+}
+.client-logo-list:before {
+  left: 0;
+  top: 0;
+}
+.client-logo-list:after {
+  right: 0;
+  top: 0;
+  transform: rotate(180deg);
+}
+.client-logo-list:after,
+.client-logo-list:before {
+  content: "";
+  height: 112px;
+  position: absolute;
+  width: 200px;
+  z-index: 2;
+}
+.client-logo-slider {
+  height: 50px;
+  display: flex;
+  max-height: 50px;
+  gap: 4rem;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
