@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { CartIcon } from '@icons/Cart'
-import { getCart } from '@hooks/cart'
+import { getCart } from '@/hooks/cart'
 import { CloseIcon } from '@icons/Close'
 import { MenuIcon } from '@icons/Menu'
 import logo from '@assets/logo-diprofire.png'

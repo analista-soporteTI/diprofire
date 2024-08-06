@@ -13,7 +13,7 @@ import {
   removeFromCart,
   clearCart,
   updateQuantity
-} from '@hooks/cart'
+} from '@/hooks/cart'
 import { ImportantIcon } from '@icons/Important'
 import { mailtoCartProducts } from '@hooks/mailto.js'
 import notFoundImg from '@assets/products/not found.png'

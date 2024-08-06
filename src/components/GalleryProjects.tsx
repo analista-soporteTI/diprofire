@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import useSWR from 'swr'
-import { getProjects } from '@api/apiWordpress'
+import { getProjects } from '@/api/apiWordpress'
 import { ProjectCard } from '@components/ProjectCard'
 import { LoaderCardBig } from '@components/status/LoaderCard'
 import useProjectStore from '@hooks/storeProjects'

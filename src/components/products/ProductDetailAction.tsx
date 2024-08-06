@@ -2,7 +2,7 @@
 import { ButtonCartSecondary } from '@components/buttons/ButtonCart'
 import { ButtonPrimary } from '@components/buttons/ButtonPrimary'
 import { useEffect, useState } from 'react'
-import { addToCart } from '@hooks/cart'
+import { addToCart } from '@/hooks/cart'
 import { mailtoDetailProduct } from '@hooks/mailto'
 import { CartIcon } from '@icons/Cart'
 import '@styles/quantity.css'
