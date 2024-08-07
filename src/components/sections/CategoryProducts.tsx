@@ -69,6 +69,7 @@ export const CategoryProducts = () => {
               alt={`imagen: ${altImages[categoryImages.indexOf(category)]}`}
               width={600}
               height={400}
+              loading='lazy'
               className='w-full h-full object-cover object-center aspect-video'
             />
           }
