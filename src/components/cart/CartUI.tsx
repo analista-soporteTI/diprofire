@@ -6,63 +6,63 @@ import {
 } from '@components/buttons/ButtonCart'
 import { ButtonBack } from '@components/buttons/ButtonBack'
 import { Quantity } from '@components/products/Quantity'
-import { useState } from 'react'
-import {
-  getCart,
-  addOneToCart,
-  removeFromCart,
-  clearCart,
-  updateQuantity
-} from '@/hooks/cart'
+import { useEffect, useState } from 'react'
+import useCartStore from '@/hooks/cart'
 import { ImportantIcon } from '@icons/Important'
-import { mailtoCartProducts } from '@hooks/mailto.js'
+import { mailtoCartProducts } from '@hooks/mailto'
 import notFoundImg from '@assets/products/not found.png'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export const CartUI = () => {
-  const [cart, setCart] = useState(getCart() || [])
+  const {cart, getCart, addOneToCart, removeFromCart, clearCart, updateQuantity, getLength } = useCartStore()
+  const [lengthCart, setLengthCart] = useState(getLength())
+
+  console.log(cart)
+  console.log(lengthCart)
+
+  useEffect(() => {
+    getCart()
+  }, [getCart])
+
+  useEffect(() => {
+    setLengthCart(getLength())
+  }, [cart, getLength])
 
   const handleAddToCart = (product: any) => {
     addOneToCart(product)
-    setCart(getCart())
   }
-
   const handleRemoveFromCart = (productId: any) => {
     removeFromCart(productId)
-    setCart(getCart())
   }
-
   const handleClearCart = () => {
     clearCart()
-    setCart([])
   }
-
   const handleUpdateQuantity = (productId: any, quantity: any) => {
     updateQuantity(productId, quantity)
-    setCart(getCart())
   }
 
   return (
     <section className='py-24 px-3 min-h-screen'>
       <h1 className='text-3xl font-bold mb-8'>Carrito de cotizaciones</h1>
       <ButtonBack href='/productos'>Seguir cotizando</ButtonBack>
-      {cart.length === 0 && (
-        <p className='mt-10 block ml-3'>
-          <div className='mb-4 flex items-center gap-1 text-lg font-semibold text-green-600'>
+      {lengthCart === 0 && (
+        <div className='mt-10 block ml-3'>
+          <p className='mb-4 flex items-center gap-1 text-lg font-semibold text-green-600'>
             No hay productos en el carrito
             <ImportantIcon className='size-5' />
-          </div>
-          <div className='block'>
+          </p>
+          <p className='block'>
             Echa un vistazo a nuestros{' '}
-            <a
+            <Link
               href='/productos'
               className='text-green-600 underline underline-offset-2'
             >
               productos
-            </a>{' '}
+            </Link>{' '}
             y añade los que te interesen a tu carrito de cotizaciones.
-          </div>
-        </p>
+          </p>
+        </div>
       )}
       <div className='flex flex-col gap-y-4 mt-5 p-5 rounded-md'>
         <div className='grid grid-cols-3 gap-4 items-center text-lg font-semibold border-b border-black/20 pb-4'>
@@ -89,12 +89,18 @@ export const CartUI = () => {
                       <Image
                         src={item.img}
                         alt={`Previsualización del producto: ${item.name}`}
+                        width={80}
+                        height={80}
+                        loading='lazy'
                         className='max-w-[80px] rounded-md aspect-square'
                       />
                     ) : (
                       <Image
                         src={notFoundImg.src}
                         alt={`Imagen de producto sin previsualización`}
+                        width={80}
+                        height={80}
+                        loading='lazy'
                         className='max-w-[80px] rounded-md aspect-square bg-white'
                       />
                     )}
@@ -120,7 +126,9 @@ export const CartUI = () => {
                   subQuantity={() =>
                     handleUpdateQuantity(item.id, item.quantity - 1)
                   }
-                  updateQuantity={(value: any) => handleUpdateQuantity(item.id, value)}
+                  updateQuantity={(value: any) =>
+                    handleUpdateQuantity(item.id, value)
+                  }
                 />
               </li>
             ))}
@@ -129,13 +137,13 @@ export const CartUI = () => {
       </div>
       <div className='flex flex-wrap gap-4 mt-8 ml-3'>
         <ButtonCartPrimary
-          disabled={cart.length === 0}
+          disabled={lengthCart === 0}
           href={mailtoCartProducts(cart)}
         >
           Enviar cotización
         </ButtonCartPrimary>
         <ButtonCartSecondary
-          disabled={cart.length === 0}
+          disabled={lengthCart === 0}
           onClick={() => handleClearCart()}
           className='hover:bg-transparent border-transparent hover:border-red-600 text-red-600 hover:text-red-600'
         >
