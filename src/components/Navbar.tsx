@@ -1,24 +1,27 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { CartIcon } from '@icons/Cart'
-import { getCart } from '@/hooks/cart'
+import useCartStore from '@/hooks/cart'
 import { CloseIcon } from '@icons/Close'
 import { MenuIcon } from '@icons/Menu'
 import logo from '@assets/logo-diprofire.png'
 import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export const Navbar = () => {
+  const { getLength } = useCartStore()
+
   const [scrolling, setScrolling] = useState(false)
-  const [counterCart, setCounterCart] = useState(getCart().length || 0)
+  const [counterCart, setCounterCart] = useState(getLength())
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const [isHomePage, setIsHomePage] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setIsHomePage(window.location.pathname === '/')
-    }
-  }, [])
+    setIsHomePage(pathname === '/')
+  }, [pathname])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +38,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCounterCart(getCart().length)
+      setCounterCart(getLength())
     }, 1000)
 
     return () => {
@@ -80,33 +83,33 @@ export const Navbar = () => {
           <nav aria-label='Global' className='hidden min-[820px]:block'>
             <ul className='flex items-center gap-6 text-base [&>li>a:hover]:text-green-500'>
               <li>
-                <a href='/'>Inicio</a>
+                <Link href='/'>Inicio</Link>
               </li>
               <li>
-                <a href='/empresa'>Empresa</a>
+                <Link href='/empresa'>Empresa</Link>
               </li>
               <li>
-                <a href='/servicios'>Servicios</a>
+                <Link href='/servicios'>Servicios</Link>
               </li>
               <li>
-                <a href='/productos'>Productos</a>
+                <Link href='/productos'>Productos</Link>
               </li>
               <li>
-                <a href='/proyectos'>Proyectos</a>
+                <Link href='/proyectos'>Proyectos</Link>
               </li>
               <li>
-                <a href='/contacto'>Contacto</a>
+                <Link href='/contacto'>Contacto</Link>
               </li>
             </ul>
           </nav>
-          <a
+          <Link
             className='gap-1.5 items-center hover:text-green-500 hidden max-[820px]:flex max-[920px]:mr-5'
             href='/carrito'
             title='Cart'
           >
             <CartIcon className='fill-green-600 size-5' />
             {counterCart} <span className='max-[426px]:hidden'>{msgCart}</span>
-          </a>
+          </Link>
           <button
             className='min-[820px]:hidden'
             onClick={() => setMenuOpen(!menuOpen)}
@@ -124,7 +127,7 @@ export const Navbar = () => {
               />
             )}
           </button>
-          <a
+          <Link
             className='gap-1.5 items-center hover:text-green-500 hidden min-[820px]:flex min-[920px]:ml-5'
             href='/carrito'
             title='Cart'
@@ -132,7 +135,7 @@ export const Navbar = () => {
             <CartIcon className='fill-green-600 size-5' />
             {counterCart}{' '}
             <span className='min-[920px]:block hidden'>{msgCart}</span>
-          </a>
+          </Link>
         </div>
       </div>
       {menuOpen && (
@@ -144,34 +147,34 @@ export const Navbar = () => {
         >
           <ul className='flex flex-col items-start gap-6 text-base py-4 [&>li]:w-full [&>li>a]:block [&>li>a:hover]:text-green-600'>
             <li>
-              <a href='/' onClick={() => setMenuOpen(false)}>
+              <Link href='/' onClick={() => setMenuOpen(false)}>
                 Inicio
-              </a>
+              </Link>
             </li>
             <li>
-              <a href='/empresa' onClick={() => setMenuOpen(false)}>
+              <Link href='/empresa' onClick={() => setMenuOpen(false)}>
                 Empresa
-              </a>
+              </Link>
             </li>
             <li>
-              <a href='/servicios' onClick={() => setMenuOpen(false)}>
+              <Link href='/servicios' onClick={() => setMenuOpen(false)}>
                 Servicios
-              </a>
+              </Link>
             </li>
             <li>
-              <a href='/productos' onClick={() => setMenuOpen(false)}>
+              <Link href='/productos' onClick={() => setMenuOpen(false)}>
                 Productos
-              </a>
+              </Link>
             </li>
             <li>
-              <a href='/proyectos' onClick={() => setMenuOpen(false)}>
+              <Link href='/proyectos' onClick={() => setMenuOpen(false)}>
                 Proyectos
-              </a>
+              </Link>
             </li>
             <li>
-              <a href='/contacto' onClick={() => setMenuOpen(false)}>
+              <Link href='/contacto' onClick={() => setMenuOpen(false)}>
                 Contacto
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
