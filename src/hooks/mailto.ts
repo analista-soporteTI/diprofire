@@ -1,4 +1,4 @@
-export const mailtoDetailProduct = product => {
+export const mailtoDetailProduct = (product: any) => {
   return `mailto:diprofire@diprofire.cl
     ?subject=Cotización de ${product.name}
     &body=Hola, me gustaría cotizar.
@@ -7,16 +7,16 @@ export const mailtoDetailProduct = product => {
     %0D%0A%0D%0A
     SKU: ${product.sku}
     %0D%0A%0D%0A
-    ${product.model ? `Modelo: ${product.model}` : ''}
+    ${product.model ? `Modelo: ${product.model}` : 'Sin modelo especificado'}
     %0D%0A%0D%0A
-    ${product.brand ? `Marca: ${product.brand}` : ''}
+    ${product.brand ? `Marca: ${product.brand}` : 'Sin marca especificada'}
     %0D%0A%0D%0A
     Cantidad: ${product.quantity}
   `
 }
 
-export const mailtoCartProducts = cart => {
-  let body = cart.reduce((acc, item) => {
+export const mailtoCartProducts = (cart: any) => {
+  let body = cart.reduce((acc: any, item: any) => {
     return `${acc}
       %0D%0A%0D%0A
       ${item.name} - SKU: ${item.sku} - ${

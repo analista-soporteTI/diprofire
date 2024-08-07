@@ -1,4 +1,4 @@
-export const createInfoProduct = ({ product, quantity = 0 }) => {
+export const createInfoProduct = ({ product, quantity = 0 }: any) => {
   return {
     id: product.id,
     sku: product.sku,
