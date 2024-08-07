@@ -166,7 +166,7 @@ export const ContactForm = () => {
               id='message'
               name='message'
               rows='5'
-              className='mt-2 block w-full p-2 border border-gray-300 rounded'
+              className='mt-2 block w-full p-2 border border-gray-300 rounded max-h-[300px]'
             />
             <ErrorMessage
               name='message'
