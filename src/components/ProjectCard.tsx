@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export const ProjectCard = ({ project }: any) => {
   const parsedDescription = project.description.replace(/<[^>]*>/g, '')
 
@@ -21,12 +23,12 @@ export const ProjectCard = ({ project }: any) => {
       <p className='mb-2 text-sm/relaxed text-gray-500 line-clamp-2'>
         {parsedDescription}
       </p>
-      <a
+      <Link
         href={`/proyectos/${project.slug}`}
         className='text-green-600 hover:text-green-700'
       >
         Leer más
-      </a>
+      </Link>
     </article>
   )
 }
