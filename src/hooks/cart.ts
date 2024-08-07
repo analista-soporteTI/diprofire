@@ -1,65 +1,91 @@
 'use client'
 
-export const getCart = () => {
-  if (typeof window !== 'undefined') {
-    const cart = localStorage.getItem('cart')
-    return cart ? JSON.parse(cart) : []
-  }
-  return []
+import { create } from 'zustand'
+
+interface Product {
+  id: string
+  sku: string
+  name: string
+  model: string
+  brand: string
+  quantity: number
+  img: string
 }
 
-export const saveCart = (cart: any) => {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('cart', JSON.stringify(cart))
-  }
+interface CartState {
+  cart: Product[]
+  getCart: () => void
+  getLength: () => number
+  addOneToCart: (product: Product) => void
+  addToCart: (product: Product) => void
+  removeFromCart: (productId: string) => void
+  clearCart: () => void
+  updateQuantity: (productId: string, quantity: number) => void
 }
 
-export const addOneToCart = (product: any) => {
-  let cart = getCart()
-  const productIndex = cart.findIndex((item: any) => item.id === product.id)
+const useCartStore = create<CartState>((set, get) => ({
+  cart: [],
 
-  if (productIndex > -1) {
-    cart[productIndex].quantity += 1
-  } else {
-    cart.push({ ...product, quantity: 1 })
-  }
+  getCart: () => {
+    if (typeof window !== 'undefined') {
+      const storedCart = localStorage.getItem('cart')
+      if (storedCart) {
+        set({ cart: JSON.parse(storedCart) })
+      }
+    }
+  },
 
-  saveCart(cart)
-}
+  getLength: () => {
+    return get().cart.length
+  },
 
-export const addToCart = (product: any) => {
-  let cart = getCart()
-  const productIndex = cart.findIndex((item: any) => item.id === product.id)
+  addOneToCart: (product) =>
+    set(state => {
+      const cart = state.cart.map(item =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+      const productExists = cart.some(item => item.id === product.id)
+      if (!productExists) {
+        cart.push({ ...product, quantity: 1 })
+      }
+      localStorage.setItem('cart', JSON.stringify(cart))
+      return { cart }
+    }),
 
-  if (productIndex > -1) {
-    cart[productIndex].quantity += product.quantity
-  } else {
-    cart.push({ ...product })
-  }
+  addToCart: (product) =>
+    set(state => {
+      const cart = state.cart.map(item =>
+        item.id === product.id ? { ...item, quantity: item.quantity + product.quantity } : item
+      )
+      const productExists = cart.some(item => item.id === product.id)
+      if (!productExists) {
+        cart.push(product)
+      }
+      localStorage.setItem('cart', JSON.stringify(cart))
+      return { cart }
+    }),
 
-  saveCart(cart)
-}
+  removeFromCart: (productId) =>
+    set(state => {
+      const cart = state.cart.filter(item => item.id !== productId)
+      localStorage.setItem('cart', JSON.stringify(cart))
+      return { cart }
+    }),
 
-export const removeFromCart = (productId: any) => {
-  let cart = getCart()
-  cart = cart.filter((item: any) => item.id !== productId)
+  clearCart: () =>
+    set(() => {
+      localStorage.removeItem('cart')
+      return { cart: [] }
+    }),
 
-  saveCart(cart)
-}
+  updateQuantity: (productId, quantity) =>
+    set(state => {
+      const cart = state.cart.map(item =>
+        item.id === productId ? { ...item, quantity } : item
+      )
+      localStorage.setItem('cart', JSON.stringify(cart))
+      return { cart }
+    })
+}))
 
-export const clearCart = () => {
-  if (typeof window !== 'undefined') {
-    localStorage.removeItem('cart')
-  }
-}
-
-export const updateQuantity = (productId: any, quantity: any) => {
-  let cart = getCart()
-  const productIndex = cart.findIndex((item: any) => item.id === productId)
-
-  if (productIndex > -1) {
-    cart[productIndex].quantity = quantity
-  }
-
-  saveCart(cart)
-}
+export default useCartStore
