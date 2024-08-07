@@ -24,7 +24,7 @@ export const SliderBrands = () => {
         </div>
         <h3 className='text-2xl sm:text-3xl font-bold text-center max-w-[60ch] mx-auto'>
           Y la confianza de{' '}
-          <span className='text-green-600'>más de 10 grandes empresas.</span>
+          <span className='text-green-600'>más de 10 grandes empresas</span>
         </h3>
       </div>
       <div className='client-logo-slider my-16'>
