@@ -32,10 +32,8 @@ export const CardProduct = ({
           alt={`Previsualización del producto: ${name}`}
           width={180}
           height={180}
-          objectFit='cover'
-          loader={({ src }: any) => src}
           loading='lazy'
-          className='aspect-square w-full rounded border-2 border-zinc-200 shadow-sm bg-white'
+          className='aspect-square object-cover w-full rounded border-2 border-zinc-200 shadow-sm bg-white'
         />
       </figure>
       <div className='mt-3 flex flex-col justify-evenly'>
