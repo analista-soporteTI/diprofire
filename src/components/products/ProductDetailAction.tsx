@@ -2,7 +2,7 @@
 import { ButtonCartSecondary } from '@components/buttons/ButtonCart'
 import { ButtonPrimary } from '@components/buttons/ButtonPrimary'
 import { useEffect, useState } from 'react'
-import { addToCart } from '@/hooks/cart'
+import useCartStore from '@/hooks/cart'
 import { mailtoDetailProduct } from '@hooks/mailto'
 import { CartIcon } from '@icons/Cart'
 import '@styles/quantity.css'
@@ -10,6 +10,7 @@ import { createInfoProduct } from '@hooks/infoProducts'
 
 export const ProductDetailAction = ({ product, link = '' }: any) => {
   const [quantity, setQuantity] = useState(1)
+  const { addToCart } = useCartStore()
 
   const infoProduct = createInfoProduct({ product: product, quantity: quantity })
 
