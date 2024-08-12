@@ -32,7 +32,7 @@ export const CardProduct = ({
         width={180}
         height={180}
         loading='lazy'
-        className='aspect-square object-cover w-full min-w-[180px] rounded border-2 border-zinc-200 shadow-sm bg-white'
+        className='aspect-square object-cover h-[180px] w-[180px] rounded border-2 border-zinc-200 shadow-sm bg-white'
       />
       <div className='mt-3 flex flex-col justify-evenly'>
         <h2 className='font-medium text-base text-gray-900 pb-1 mb-1 border-b border-zinc-300'>
