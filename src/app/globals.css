@@ -2,11 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+*::selection {
+  background-color: #16a34a;
+  color: #fff;
+}
 html {
   scroll-behavior: smooth;
 }
 body {
   font-family: "Lato", "Inter Variable", sans-serif;
+  --sb-track-color: #f3f4f6;
+  --sb-thumb-color: #16a34a;
+  --sb-size: 10px;
 }
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
@@ -21,6 +28,26 @@ p, a, li, span {
 .bg-section-clip-reverse {
   padding: 6rem 0;
   clip-path: polygon(0 0, 100% 5%, 100% 95%, 0% 100%);
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 3px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 1px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
 }
 
 @media screen and (min-width: 640px) {
