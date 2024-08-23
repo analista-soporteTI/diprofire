@@ -13,11 +13,11 @@ export const About = () => {
         <p className='mt-6 mb-4'>
           Es por ello que nos especializamos en normativa contra incendios y
           contamos con la{' '}
-          <strong>certificación de fábrica de KIDDE FIRE SYSTEMS.</strong>
+          <strong>certificación de fábrica de Kidde Fire Systems.</strong>
         </p>
         <p className='mb-4'>
           Queremos establecer un nivel razonable de seguridad contra incendios y
-          de seguridad humana y de protección de propiedades
+          de seguridad humana y de protección de propiedades{' '}
           <strong>
             contra los riesgos creados por incendios, explosiones y condiciones
             peligrosas
