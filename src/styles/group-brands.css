@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 4rem;
-  animation: company-logo-slide calc(var(--companies) * 3s) linear infinite;
-  -webkit-animation: company-logo-slide calc(var(--companies) * 3s) linear
+  animation: company-logo-slide calc(var(--companies) * 2.8s) linear infinite;
+  -webkit-animation: company-logo-slide calc(var(--companies) * 2.8s) linear
     infinite;
   min-width: -moz-fit-content;
   min-width: fit-content;
