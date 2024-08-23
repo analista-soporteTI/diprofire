@@ -64,7 +64,7 @@ describe('mailtoCartProducts', () => {
     ]
 
     const expectedLink =
-      'mailto:diprofire@diprofire.cl' +
+      'mailto:ventas@diprofire.cl' +
       '?subject=Cotización%20de%20productos' +
       '&body=Hola,%20me%20gustaría%20cotizar%20los%20siguientes%20productos:%0D%0A%0D%0A' +
       'Product%201%20-%20SKU:%2011111%20-%20Model%20A%20-%20Brand%20A%20-%202%20unidad(es)%0D%0A%0D%0A' +
