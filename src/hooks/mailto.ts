@@ -1,6 +1,6 @@
 export const mailtoDetailProduct = (product: any) => {
   return (
-    `mailto:diprofire@diprofire.cl` +
+    `mailto:ventas@diprofire.cl` +
     `?subject=Cotización%20de%20${encodeURIComponent(product.name)}` +
     `&body=Hola,%20me%20gustaría%20cotizar.%0D%0A%0D%0A` +
     `Producto:%20${encodeURIComponent(product.name)}%0D%0A%0D%0A` +
@@ -33,7 +33,7 @@ export const mailtoCartProducts = (cart: any) => {
   }, '')
 
   return (
-    `mailto:diprofire@diprofire.cl` +
+    `mailto:ventas@diprofire.cl` +
     `?subject=Cotización%20de%20productos` +
     `&body=Hola,%20me%20gustaría%20cotizar%20los%20siguientes%20productos:` +
     `${body}`

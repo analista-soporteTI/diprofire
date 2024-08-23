@@ -11,7 +11,7 @@ describe('mailtoDetailProduct', () => {
     }
 
     const expectedLink =
-      'mailto:diprofire@diprofire.cl' +
+      'mailto:ventas@diprofire.cl' +
       '?subject=Cotización%20de%20Test%20Product' +
       '&body=Hola,%20me%20gustaría%20cotizar.%0D%0A%0D%0A' +
       'Producto:%20Test%20Product%0D%0A%0D%0A' +
@@ -31,7 +31,7 @@ describe('mailtoDetailProduct', () => {
     }
 
     const expectedLink =
-      'mailto:diprofire@diprofire.cl' +
+      'mailto:ventas@diprofire.cl' +
       '?subject=Cotización%20de%20Test%20Product' +
       '&body=Hola,%20me%20gustaría%20cotizar.%0D%0A%0D%0A' +
       'Producto:%20Test%20Product%0D%0A%0D%0A' +
