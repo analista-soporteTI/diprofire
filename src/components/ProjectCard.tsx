@@ -1,4 +1,5 @@
-import Link from "next/link"
+import Link from 'next/link'
+import { ArrowRight } from '@/icons/ArrowRight'
 
 export const ProjectCard = ({ project }: any) => {
   const parsedDescription = project.description.replace(/<[^>]*>/g, '')
@@ -25,9 +26,10 @@ export const ProjectCard = ({ project }: any) => {
       </p>
       <Link
         href={`/proyectos/${project.slug}`}
-        className='text-green-600 hover:text-green-700'
+        className='text-green-600 border-l-2 pl-2 hover:text-green-700 border-green-700 group'
       >
         Leer más
+        <ArrowRight className='inline-block w-4 h-4 ml-1 fill-green-600 duration-200 group-hover:fill-green-700 group-hover:translate-x-1' />
       </Link>
     </article>
   )
