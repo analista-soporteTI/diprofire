@@ -1,6 +1,7 @@
 import { ButtonBack } from '@components/buttons/ButtonBack'
 import '@styles/detail-project-layout.css'
 import { getProjects } from '@/api/apiWordpress'
+import { ButtonUp } from '@/components/buttons/ButtonUp';
 
 export default async function ProjectDetail({ params }: any) {
   const allProjects = await getProjects();
@@ -25,11 +26,12 @@ export default async function ProjectDetail({ params }: any) {
           <ButtonBack href='/proyectos' className='mb-10 no-underline text-gray-600'>
             Volver a la lista de proyectos
           </ButtonBack>
-          <h1 className='text-3xl font-bold mb-4'>{title.rendered}</h1>
+          <h1 id='#titleProject' className='text-3xl font-bold mb-4'>{title.rendered}</h1>
           <time>{formattedDate}</time>
         </div>
         <div dangerouslySetInnerHTML={{ __html: content.rendered }} />
       </div>
+      <ButtonUp href='#titleProject' className='bottom-2' />
     </main>
   );
 }
