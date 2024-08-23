@@ -44,7 +44,7 @@ export const Navbar = () => {
     return () => {
       clearInterval(interval)
     }
-  }, [counterCart])
+  }, [counterCart, getLength])
 
   const msgCart =
     counterCart > 1 || counterCart === 0 ? 'cotizaciones' : 'cotización'
