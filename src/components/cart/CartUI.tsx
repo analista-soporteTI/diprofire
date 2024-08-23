@@ -140,7 +140,7 @@ export const CartUI = () => {
           disabled={lengthCart === 0}
           href={mailtoCartProducts(cart)}
         >
-          Enviar cotización
+          Solicitar cotización
         </ButtonCartPrimary>
         <ButtonCartSecondary
           disabled={lengthCart === 0}

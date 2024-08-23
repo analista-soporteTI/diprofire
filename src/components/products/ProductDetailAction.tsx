@@ -72,7 +72,7 @@ export const ProductDetailAction = ({ product, link = '' }: any) => {
             target='_blank'
             className='text-sm !px-4 !h-[36px]'
           >
-            Cotizar
+            Solicitar cotización
           </ButtonPrimary>
         )}
         <ButtonCartSecondary
