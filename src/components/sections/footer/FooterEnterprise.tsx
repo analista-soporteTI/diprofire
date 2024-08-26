@@ -74,7 +74,7 @@ export const FooterEnterprise = () => {
           <div className='flex flex-col gap-8 [&>p]:flex [&>p]:items-center [&>p]:gap-2'>
             <p>
               <EmailIcon className='size-7 ml-0.5' />
-              diprofire@diprofire.cl
+              ventas@diprofire.cl
             </p>
             <p>
               <PhoneIcon className='size-[30px]' />
