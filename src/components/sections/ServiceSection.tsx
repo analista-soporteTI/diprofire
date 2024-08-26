@@ -30,7 +30,7 @@ const servicesData = [
     img: proteccionPasiva,
     title: 'Protección Pasiva',
     description:
-      'Para prevenir la propagación de incendios, es esencial proteger los puntos críticos con productos de Protección Pasiva de Incendios de 3M. Nuestros servicios incluyen:',
+      'Para prevenir la propagación de incendios, es esencial proteger los puntos críticos con productos de Protección Pasiva de Incendios. Nuestros servicios incluyen:',
     items: [
       'Juntas Estructurales',
       'Tuberías Hidráulicas',
