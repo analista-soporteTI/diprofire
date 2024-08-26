@@ -10,6 +10,7 @@ import picture1 from '@assets/servicios/deteccion incendio.webp'
 import picture2 from '@assets/servicios/sistema extinsion agua.webp'
 import picture3 from '@assets/servicios/agente limpio.webp'
 import picture4 from '@assets/servicios/proteccion pasiva.webp'
+import { ButtonPrimary } from '../buttons/ButtonPrimary'
 
 const categoryImages = [picture1, picture2, picture3, picture4]
 const altImages = [
@@ -55,12 +56,9 @@ export const CategoryProducts = () => {
               </li>
             </ul>
           </div>
-          <a
-            href='/productos'
-            className='block w-fit rounded bg-green-600 px-6 py-2.5 mt-8 font-bold text-white hover:bg-green-700 focus:outline-none focus:ring active:text-opacity-75 duration-200'
-          >
+          <ButtonPrimary href='/productos' className='mt-8'>
             Ver productos
-          </a>
+          </ButtonPrimary>
         </div>
         <figure className='w-full max-[740px]:h-[240px] min-[740px]:max-w-[280px] min-[860px]:max-w-[400px] min-[1060px]:max-w-[600px] h-[400px] bg-cover bg-center bg-no-repeat relative overflow-hidden rounded-lg '>
           {
