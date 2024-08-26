@@ -8,21 +8,21 @@ import notFoundImg from '@assets/products/not found.png'
 import { StatusMessage } from '@/components/status/StatusMessage'
 
 interface Product {
-  objectID: string;
-  sku: string;
-  nombre: string;
-  imagen: string;
-  descripcion: string;
-  marca: string;
-  categoria: string;
-  modelo: string;
+  objectID: string
+  sku: string
+  nombre: string
+  imagen: string
+  descripcion: string
+  marca: string
+  categoria: string
+  modelo: string
 }
 
 async function findProduct (id: any): Promise<Product | null> {
   try {
     const products = await getAllProducts()
     const product = products.find(product => product.objectID === id)
-    return product as Product || null
+    return (product as Product) || null
   } catch (error) {
     console.error('Error finding product:', error)
     return null
@@ -30,10 +30,10 @@ async function findProduct (id: any): Promise<Product | null> {
 }
 
 interface ProductDetailProps {
-  params: { objectID: string };
+  params: { objectID: string }
 }
 
-export default async function ProductDetail({ params }: ProductDetailProps) {
+export default async function ProductDetail ({ params }: ProductDetailProps) {
   const { objectID } = params
   const product = await findProduct(objectID)
 
@@ -63,10 +63,7 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
     <main className='mx-auto max-w-7xl px-4 sm:px-10 pt-24 pb-8 md:py-48 grid items-center'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 lg:gap-24 items-center'>
         <div className='w-full order-2 md:order-1'>
-          <ButtonBack
-            href='/productos'
-            className='mb-10 bg-green-transparent hover:bg-gray-200 duration-200 rounded-md pr-3 py-1'
-          >
+          <ButtonBack href='/productos' className='mb-10'>
             Volver a productos
           </ButtonBack>
           <h1 className='font-bold text-3xl md:text-4xl pb-4 text-green-600'>
@@ -83,7 +80,7 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
             </h2>
             <p>SKU: {sku}</p>
             {modelo ? <p>Modelo: {modelo}</p> : null}
-            <p>Marca: {marca}</p>
+            {marca ? <p>Marca: {marca}</p> : null}
           </div>
           <ProductDetailAction product={infoProduct} />
           {categoria ? (
