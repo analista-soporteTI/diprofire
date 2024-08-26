@@ -59,7 +59,7 @@ const CustomInfiniteHits = () => {
 
   return (
     <div className='ais-InfiniteHits'>
-      <ul className='grid grid-cols-1 min-[374px]:grid-cols-2 min-[580px]:grid-cols-3 min-[900px]:grid-cols-4 min-[1000px]:grid-cols-5 gap-6'>
+      <ul className='grid grid-cols-1 sm:grid-cols-2 min-[921px]:grid-cols-3 xl:grid-cols-4 gap-6'>
         {hits.map((hit: any) => (
           <li key={hit.objectID} className='flex flex-col'>
             <Hit hit={hit} />
@@ -91,7 +91,7 @@ const CustomSearchBox = () => {
   return (
     <label
       htmlFor='customSearchAlgolia'
-      className='flex w-full gap-4 items-center border border-green-600 rounded-md px-2'
+      className='flex w-full gap-4 items-center border border-zinc-300 rounded-md px-2'
     >
       <Image
         src={algoliaLogo}
@@ -119,8 +119,8 @@ export const GalleryProducts = () => {
       </h1>
       <div className='mb-6 relative'>
         <InstantSearch indexName={indexName} searchClient={searchClient}>
-          <div className='border-b border-zinc-300 mb-10 pb-10 flex flex-wrap gap-6 lg:gap-10 xl:gap-20'>
-            <div className='w-full max-w-md'>
+          <div className='mb-10 flex flex-wrap gap-6 lg:gap-10 xl:gap-20'>
+            <div className='w-full max-w-xl'>
               <CustomSearchBox />
               <ClearRefinements
                 excludedAttributes={[]}
