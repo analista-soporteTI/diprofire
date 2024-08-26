@@ -9,13 +9,22 @@ import { Quantity } from '@components/products/Quantity'
 import { useEffect, useState } from 'react'
 import useCartStore from '@/hooks/cart'
 import { ImportantIcon } from '@icons/Important'
-import { mailtoCartProducts } from '@hooks/mailto'
 import notFoundImg from '@assets/products/not found.png'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ButtonMail } from '@components/buttons/ButtonMail'
+import { Mail, Trash2, X } from 'lucide-react'
 
 export const CartUI = () => {
-  const {cart, getCart, addOneToCart, removeFromCart, clearCart, updateQuantity, getLength } = useCartStore()
+  const {
+    cart,
+    getCart,
+    addOneToCart,
+    removeFromCart,
+    clearCart,
+    updateQuantity,
+    getLength
+  } = useCartStore()
   const [lengthCart, setLengthCart] = useState(getLength())
 
   console.log(cart)
@@ -43,9 +52,9 @@ export const CartUI = () => {
   }
 
   return (
-    <section className='py-24 px-3 min-h-screen'>
-      <h1 className='text-3xl font-bold mb-8'>Carrito de cotizaciones</h1>
+    <section className='py-24 px-3 md:px-10 w-full mx-auto max-w-5xl'>
       <ButtonBack href='/productos'>Seguir cotizando</ButtonBack>
+      <h1 className='text-3xl font-bold mb-8'>Carrito de cotizaciones</h1>
       {lengthCart === 0 && (
         <div className='mt-10 block ml-3'>
           <p className='mb-4 flex items-center gap-1 text-lg font-semibold text-green-600'>
@@ -65,25 +74,21 @@ export const CartUI = () => {
         </div>
       )}
       <div className='flex flex-col gap-y-4 mt-5 p-5 rounded-md'>
-        <div className='grid grid-cols-3 gap-4 items-center text-lg font-semibold border-b border-black/20 pb-4'>
-          <p className='col-span-2 max-sm:col-span-3'>Producto</p>
-          <p className='col-span-1 max-sm:hidden'>Cantidad</p>
-        </div>
-        <div>
+        {lengthCart > 0 && (
           <ul className='space-y-4 max-sm:space-y-10'>
             {cart.map((item: any) => (
               <li
                 key={item.name}
-                className='first:mt-0 last:mb-0 grid sm:grid-cols-3 gap-4 items-center max-sm:peer-even:bg-gray-900'
+                className='first:mt-0 last:mb-0 flex flex-wrap justify-between gap-4 items-center max-sm:peer-even:bg-gray-900 border-b border-black/20 py-4'
               >
                 <div className='flex max-[400px]:flex-col max-sm:items-start items-center gap-4 sm:col-span-2'>
                   <div className='flex gap-4'>
                     <button
                       onClick={() => handleRemoveFromCart(item.id)}
-                      className='hover:opacity-70'
+                      className='h-fit my-auto p-2 rounded-md text-red-600 hover:text-red-700 hover:bg-red-600/20'
                       title={`Eliminar ${item.name} del carrito`}
                     >
-                      ❌
+                      <X size={22} />
                     </button>
                     {item.img ? (
                       <Image
@@ -109,12 +114,12 @@ export const CartUI = () => {
                     <p className='w-fit block text-sm font-semibold'>
                       {item.name}
                     </p>
-                    <p className='w-fit block text-sm border-t border-zinc-300 pt-1 mt-1'>{`SKU: ${item.sku}`}</p>
+                    <p className='w-fit block text-sm text-zinc-600'>{`SKU: ${item.sku}`}</p>
                     {item.model && (
-                      <p className='w-fit block text-sm'>{`Modelo: ${item.model}`}</p>
+                      <p className='w-fit block text-sm text-zinc-600'>{`Modelo: ${item.model}`}</p>
                     )}
                     {item.brand && (
-                      <p className='w-fit block text-sm'>{`Marca: ${item.brand}`}</p>
+                      <p className='w-fit block text-sm text-zinc-600'>{`Marca: ${item.brand}`}</p>
                     )}
                   </div>
                 </div>
@@ -133,22 +138,25 @@ export const CartUI = () => {
               </li>
             ))}
           </ul>
-        </div>
+        )}
       </div>
-      <div className='flex flex-wrap gap-4 mt-8 ml-3'>
-        <ButtonCartPrimary
-          disabled={lengthCart === 0}
-          href={mailtoCartProducts(cart)}
-        >
-          Solicitar cotización
-        </ButtonCartPrimary>
-        <ButtonCartSecondary
-          disabled={lengthCart === 0}
-          onClick={() => handleClearCart()}
-          className='hover:bg-transparent border-transparent hover:border-red-600 text-red-600 hover:text-red-600'
-        >
-          Borrar cotizaciones
-        </ButtonCartSecondary>
+      <div className='flex flex-wrap justify-between gap-4 mt-8 ml-3 mx-auto'>
+        {lengthCart > 0 && (
+          <>
+            <ButtonMail cart={cart} className='flex gap-1.5 items-center'>
+              <Mail size={20} />
+              Cotizar productos
+            </ButtonMail>
+            <ButtonCartSecondary
+              disabled={lengthCart === 0}
+              onClick={() => handleClearCart()}
+              className='mt-auto mb-0 flex gap-1.5 items-center text-red-600 border-0 hover:text-red-700 hover:bg-red-600/20'
+            >
+              <Trash2 size={20} />
+              Borrar cotizaciones
+            </ButtonCartSecondary>
+          </>
+        )}
       </div>
     </section>
   )
