@@ -10,23 +10,25 @@ export const Quantity = ({
 }: any) => {
   const inputValue = (e: any) => {
     let parsedValue = parseInt(e.target.value)
-    let newValue = parsedValue > 1 ? parsedValue : 0
+    let newValue = parsedValue > 1 ? parsedValue : 1
     updateQuantity(newValue)
   }
 
   return (
-    <div className={className}>
+    <div
+      className={`h-fit w-fit bg-transparent rounded-md border ${className}`}
+    >
       <button
         type='button'
         onClick={() => subQuantity()}
-        className='px-3 py-1 bg-gray-200 rounded-l-md hover:bg-gray-300'
+        className='px-4 py-2 rounded-l-md bg-transparent hover:bg-zinc-100 duration-200'
       >
         -
       </button>
       <input
         id='quantity'
         type='number'
-        className='w-12 mx-0.5 py-[3px] text-center bg-gray-100 border-transparent quantity-input'
+        className='w-12 py-2 mx-0.5 text-center border-transparent bg-transparent quantity-input'
         placeholder='1'
         min='1'
         value={value}
@@ -36,7 +38,7 @@ export const Quantity = ({
       <button
         type='button'
         onClick={() => addQuantity()}
-        className='px-3 py-1 bg-gray-200 rounded-r-md hover:bg-gray-300'
+        className='px-4 py-2 rounded-r-md bg-transparent hover:bg-zinc-100 duration-200'
       >
         +
       </button>
