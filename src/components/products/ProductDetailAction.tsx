@@ -1,20 +1,20 @@
 'use client'
 import { ButtonCartSecondary } from '@components/buttons/ButtonCart'
-import { ButtonPrimary } from '@components/buttons/ButtonPrimary'
 import { useEffect, useState } from 'react'
 import useCartStore from '@/hooks/cart'
-import { mailtoDetailProduct } from '@hooks/mailto'
 import { CartIcon } from '@icons/Cart'
 import '@styles/quantity.css'
 import { createInfoProduct } from '@hooks/infoProducts'
+import { ButtonMailDetail } from '@components/buttons/ButtonMailDetail'
 
 export const ProductDetailAction = ({ product, link = '' }: any) => {
   const [quantity, setQuantity] = useState(1)
   const { addToCart } = useCartStore()
 
-  const infoProduct = createInfoProduct({ product: product, quantity: quantity })
-
-  const mailto = mailtoDetailProduct(infoProduct)
+  const infoProduct = createInfoProduct({
+    product: product,
+    quantity: quantity
+  })
 
   const handleChangeQuantity = (e: any) => {
     let parsedValue = parseInt(e.target.value)
@@ -33,20 +33,20 @@ export const ProductDetailAction = ({ product, link = '' }: any) => {
   }, [product, quantity])
 
   return (
-    <div className='flex flex-wrap gap-2 mt-2 items-center'>
-      <div>
-        <div>
+    <div className='flex flex-wrap gap-6 mt-2 items-center'>
+      <div className='flex flex-wrap gap-4'>
+        <div className='h-fit w-fit bg-transparent rounded-md border'>
           <button
             type='button'
             onClick={() => setQuantity(quantity > 1 ? quantity - 1 : quantity)}
-            className='px-3 py-1 bg-gray-200 rounded-l-md hover:bg-gray-300'
+            className='px-4 py-2 rounded-l-md bg-transparent hover:bg-zinc-100 duration-200'
           >
             -
           </button>
           <input
             id='inputQuantity'
             type='number'
-            className='w-12 mx-0.5 py-[3px] text-center bg-gray-100 border-transparent quantity-input'
+            className='w-12 py-2 mx-0.5 text-center border-transparent bg-transparent quantity-input'
             placeholder='1'
             min='1'
             value={quantity}
@@ -55,33 +55,20 @@ export const ProductDetailAction = ({ product, link = '' }: any) => {
           <button
             type='button'
             onClick={() => setQuantity(quantity + 1)}
-            className='px-3 py-1 bg-gray-200 rounded-r-md hover:bg-gray-300'
+            className='px-4 py-2 rounded-r-md bg-transparent hover:bg-zinc-100 duration-200'
           >
             +
           </button>
         </div>
-      </div>
-      <div className='flex flex-wrap-reverse justify-start gap-3'>
-        {link !== '' ? (
-          <ButtonPrimary href={link} className='text-sm !px-4 !h-[36px]'>
-            Ver más
-          </ButtonPrimary>
-        ) : (
-          <ButtonPrimary
-            href={mailto}
-            target='_blank'
-            className='text-sm !px-4 !h-[36px]'
-          >
-            Solicitar cotización
-          </ButtonPrimary>
-        )}
         <ButtonCartSecondary
-          className='text-sm !px-4 !h-[36px]'
+          className='text-base !px-4 !py-2 flex gap-2'
           onClick={() => handleAddToCart()}
         >
-          <CartIcon className='size-5 fill-green-600' />
+          <CartIcon className='size-6 fill-green-600' />
+          Añadir al carrito
         </ButtonCartSecondary>
       </div>
+      <ButtonMailDetail product={infoProduct} />
     </div>
   )
 }
