@@ -1,9 +1,6 @@
 'use client'
 
-import {
-  ButtonCartPrimary,
-  ButtonCartSecondary
-} from '@components/buttons/ButtonCart'
+import { ButtonCartSecondary } from '@components/buttons/ButtonCart'
 import { ButtonBack } from '@components/buttons/ButtonBack'
 import { Quantity } from '@components/products/Quantity'
 import { useEffect, useState } from 'react'
@@ -26,9 +23,6 @@ export const CartUI = () => {
     getLength
   } = useCartStore()
   const [lengthCart, setLengthCart] = useState(getLength())
-
-  console.log(cart)
-  console.log(lengthCart)
 
   useEffect(() => {
     getCart()
@@ -79,7 +73,7 @@ export const CartUI = () => {
             {cart.map((item: any) => (
               <li
                 key={item.name}
-                className='first:mt-0 last:mb-0 flex flex-wrap justify-between gap-4 items-center max-sm:peer-even:bg-gray-900 border-b border-black/20 py-4'
+                className='first:mt-0 last:mb-0 flex max-md:flex-col max-md:items-start flex-wrap justify-between gap-4 items-center max-sm:peer-even:bg-gray-900 border-b border-black/20 py-4'
               >
                 <div className='flex max-[400px]:flex-col max-sm:items-start items-center gap-4 sm:col-span-2'>
                   <div className='flex gap-4'>
@@ -111,7 +105,7 @@ export const CartUI = () => {
                     )}
                   </div>
                   <div>
-                    <p className='w-fit block text-sm font-semibold'>
+                    <p className='w-fit block text-sm font-semibold md:max-w-[60ch]'>
                       {item.name}
                     </p>
                     <p className='w-fit block text-sm text-zinc-600'>{`SKU: ${item.sku}`}</p>
@@ -143,7 +137,7 @@ export const CartUI = () => {
       <div className='flex flex-wrap justify-between gap-4 mt-8 ml-3 mx-auto'>
         {lengthCart > 0 && (
           <>
-            <ButtonMail cart={cart} className='flex gap-1.5 items-center'>
+            <ButtonMail cart={cart}>
               <Mail size={20} />
               Cotizar productos
             </ButtonMail>
