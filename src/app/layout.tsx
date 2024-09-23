@@ -4,6 +4,7 @@ import './globals.css'
 import { META_PAGES } from '@consts/metaPages'
 import { Navbar } from '@components/Navbar'
 import { Footer } from '@components/sections/Footer'
+import { Analytics } from '@vercel/analytics/react'
 
 const lato = Lato({
   weight: ['100', '300', '400', '700', '900'],
@@ -27,6 +28,7 @@ export default function RootLayout ({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   )
