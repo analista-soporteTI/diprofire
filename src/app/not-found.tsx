@@ -1,9 +1,16 @@
 import { NotFoundImage } from '@/icons/NotFound'
 import Link from 'next/link'
+import { META_PAGES } from '@/consts/metaPages'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: META_PAGES.NOT_FOUND.title,
+  description: META_PAGES.NOT_FOUND.description
+}
 
 export default function NotFound () {
   return (
-    <main className='grid content-center min-h-[110vh] h-full w-full overflow-hidden pb-4 px-8 text-center'>
+    <section className='grid content-center min-h-[110vh] h-full w-full overflow-hidden pb-4 px-8 text-center'>
       <NotFoundImage className='mx-auto mt-20 aspect-square max-w-xs md:mt-10 md:aspect-video md:max-w-md' />
       <h1 className='text-8xl sm:text-9xl font-black text-black/15'>404</h1>
       <h2 className='mt-6 text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
@@ -40,6 +47,6 @@ export default function NotFound () {
           </Link>
         </li>
       </ul>
-    </main>
+    </section>
   )
 }

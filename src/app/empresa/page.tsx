@@ -5,10 +5,17 @@ import { History } from '@components/sections/enterprise/History'
 import { MisionVision } from '@components/sections/enterprise/MisionVision'
 import { PoliticValues } from '@components/sections/enterprise/PoliticValues'
 import { WorkWithUs } from '@components/sections/enterprise/WorkWithUs'
+import { META_PAGES } from '@/consts/metaPages'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: META_PAGES.ENTERPRISE.title,
+  description: META_PAGES.ENTERPRISE.description
+}
 
 export default function Enterprise () {
   return (
-    <main className="pt-24">
+    <div className='pt-24'>
       <section className='text-center py-10 px-4 sm:px-10'>
         <h1 className='text-3xl sm:text-5xl font-bold mb-4'>
           Diprofire Chile Ltda.
@@ -29,6 +36,6 @@ export default function Enterprise () {
       <MisionVision />
       <PoliticValues />
       <WorkWithUs />
-    </main>
+    </div>
   )
 }

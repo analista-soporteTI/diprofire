@@ -1,42 +1,43 @@
 export const META_PAGES = Object.freeze({
   HOME: {
-    title: 'Diprofire - Sistemas de protección contra incendios',
+    title: 'Diprofire | Sistemas de Protección Contra Incendios y Seguridad',
     description:
-      'En Diprofire encontrará una amplia selección de la mejor alternativa de aplicaciones de seguridad, apegándonos a las normas nacionales e internacionales.'
+      'Diprofire ofrece soluciones avanzadas en sistemas de protección contra incendios, cumpliendo con normas nacionales e internacionales. Garantizamos seguridad para su empresa o residencia con productos de alta calidad.'
   },
   ENTERPRISE: {
-    title: 'Empresa - Diprofire - Sistemas de protección contra incendios',
+    title: 'Sobre Nosotros | Diprofire - Protección Contra Incendios',
     description:
-      'Conozca más sobre nuestra empresa, nuestra misión, visión y valores que nos guían en ofrecer sistemas de protección contra incendios de la más alta calidad.'
+      'Descubra la misión, visión y valores de Diprofire, una empresa líder en sistemas de protección contra incendios, comprometida con la seguridad y la calidad en cada proyecto.'
   },
   SERVICES: {
-    title: 'Servicios - Diprofire - Sistemas de protección contra incendios',
+    title: 'Servicios de Protección Contra Incendios | Diprofire',
     description:
-      'Descubra los diversos servicios que ofrecemos para garantizar la seguridad y protección contra incendios en su empresa o hogar.'
+      'Ofrecemos instalación, mantenimiento y asesoría en sistemas de protección contra incendios para empresas e industrias. Garantizamos máxima seguridad y cumplimiento normativo.'
   },
   PRODUCTS: {
-    title: 'Productos - Diprofire - Sistemas de protección contra incendios',
+    title: 'Productos de Protección Contra Incendios | Diprofire',
     description:
-      'Explore nuestra gama de productos diseñados para proporcionar soluciones eficaces y confiables en la protección contra incendios.'
+      'Explore nuestra gama de sistemas de extinción, sistemas de alarma, agentes limpios y protección pasiva, diseñados para brindar soluciones confiables y efectivas en la protección contra incendios.'
   },
   PROJECTS: {
-    title: 'Proyectos - Diprofire - Sistemas de protección contra incendios',
+    title: 'Proyectos de Protección Contra Incendios Realizados | Diprofire',
     description:
-      'Conozca nuestros proyectos realizados, donde hemos implementado sistemas de protección contra incendios con éxito.'
+      'Vea nuestros proyectos más destacados en los que hemos implementado sistemas avanzados de protección contra incendios en industrias y edificios comerciales.'
   },
   CONTACT: {
-    title: 'Contacto - Diprofire - Sistemas de protección contra incendios',
+    title:
+      'Contáctenos | Diprofire - Soluciones en Protección Contra Incendios',
     description:
-      'Póngase en contacto con nosotros para más información sobre nuestros productos y servicios, o para solicitar una cotización.'
+      'Póngase en contacto con Diprofire para obtener más información sobre nuestros productos y servicios de protección contra incendios, o para solicitar asesoría personalizada y cotizaciones.'
   },
   CART: {
-    title: 'Carrito - Diprofire - Sistemas de protección contra incendios',
+    title: 'Carrito de Compras | Diprofire - Protección Contra Incendios',
     description:
-      'Revise los productos que ha añadido a su carrito y proceda a realizar su compra con total seguridad.'
+      'Revise los productos seleccionados para protección contra incendios y proceda a la cotización de manera segura y rápida. Asegure su entorno con nuestros productos certificados.'
   },
   NOT_FOUND: {
-    title: 'Página no encontrada - Diprofire - Sistemas de protección contra incendios',
+    title: 'Error 404 | Página no encontrada - Diprofire',
     description:
-      'La página que busca no se encuentra. Por favor, regrese a la página de inicio o contáctenos para más información.'
+      'Lo sentimos, la página que está buscando no existe. Regrese a nuestra página de inicio o contáctenos para obtener ayuda con nuestros sistemas de protección contra incendios.'
   }
 })

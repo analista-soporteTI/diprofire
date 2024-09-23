@@ -2,11 +2,18 @@ import { ServiceSection } from '@components/sections/ServiceSection'
 import { ButtonPrimary } from '@components/buttons/ButtonPrimary'
 import Image from 'next/image'
 import heroImg from '@assets/servicios/instalacion.webp'
+import { META_PAGES } from '@/consts/metaPages'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: META_PAGES.SERVICES.title,
+  description: META_PAGES.SERVICES.description
+}
 
 export default function Services () {
   return (
-    <main className='pb-10 z-10'>
-      <section className='relative overflow-hidden'>
+    <>
+      <section className='relative overflow-hidden pb-10 z-10'>
         <Image
           src={heroImg}
           alt='Instalación de sistemas de protección contra incendios'
@@ -29,6 +36,6 @@ export default function Services () {
         </div>
       </section>
       <ServiceSection />
-    </main>
+    </>
   )
 }

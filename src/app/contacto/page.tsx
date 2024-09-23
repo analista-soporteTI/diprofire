@@ -1,9 +1,16 @@
 import { ContactForm } from '@components/ContactForm'
 import { ButtonSecondary } from '@components/buttons/ButtonSecondary'
+import { META_PAGES } from '@/consts/metaPages'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: META_PAGES.CONTACT.title,
+  description: META_PAGES.CONTACT.description
+}
 
 export default function Contact () {
   return (
-    <main className="pb-20 px-4 sm:px-6 min-h-screen">
+    <section className='pb-20 px-4 sm:px-6 min-h-screen'>
       <h1 className='pt-28 max-w-2xl mx-auto text-3xl sm:text-4xl md:text-5xl font-bold mb-4'>
         Contacto
       </h1>
@@ -27,6 +34,6 @@ export default function Contact () {
         <ButtonSecondary href='tel:+56934501342'> Llamar </ButtonSecondary>
       </div>
       <ContactForm />
-    </main>
+    </section>
   )
 }
