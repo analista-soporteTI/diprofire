@@ -113,7 +113,7 @@ const CustomSearchBox = () => {
 
 export const GalleryProducts = () => {
   return (
-    <main className='pt-10 lg:pt-24 pb-10 z-10 w-full gap-10 px-4 sm:px-10 max-[1024px]:pt-20 max-w-7xl mx-auto'>
+    <section className='min-h-[100vh] pt-10 lg:pt-24 pb-10 z-10 w-full gap-10 px-4 sm:px-10 max-[1024px]:pt-20 max-w-7xl mx-auto'>
       <h1 id='titleGallery' className='text-3xl font-bold text-start mb-6'>
         Todos <span className='text-green-600'>nuestros productos</span>
       </h1>
@@ -135,6 +135,6 @@ export const GalleryProducts = () => {
         </InstantSearch>
         <ButtonUp href='#titleGallery' />
       </div>
-    </main>
+    </section>
   )
 }
