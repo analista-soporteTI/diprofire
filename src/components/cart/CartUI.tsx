@@ -50,7 +50,7 @@ export const CartUI = () => {
       <ButtonBack href='/productos'>Seguir cotizando</ButtonBack>
       <h1 className='text-3xl font-bold mb-8'>Carrito de cotizaciones</h1>
       {lengthCart === 0 && (
-        <div className='mt-10 block ml-3'>
+        <div className='mt-10 block'>
           <p className='mb-4 flex items-center gap-1 text-lg font-semibold text-green-600'>
             No hay productos en el carrito
             <ImportantIcon className='size-5' />
@@ -67,8 +67,8 @@ export const CartUI = () => {
           </p>
         </div>
       )}
-      <div className='flex flex-col gap-y-4 mt-5 p-5 rounded-md'>
-        {lengthCart > 0 && (
+      {lengthCart > 0 && (
+        <div className='flex flex-col gap-y-4 mt-5 p-5 rounded-md'>
           <ul className='space-y-4 max-sm:space-y-10'>
             {cart.map((item: any) => (
               <li
@@ -132,10 +132,10 @@ export const CartUI = () => {
               </li>
             ))}
           </ul>
-        )}
-      </div>
-      <div className='flex flex-wrap justify-between gap-4 mt-8 ml-3 mx-auto'>
-        {lengthCart > 0 && (
+        </div>
+      )}
+      {lengthCart > 0 && (
+        <div className='flex flex-wrap justify-between gap-4 mt-8 mx-auto'>
           <>
             <ButtonMail cart={cart}>
               <Mail size={20} />
@@ -149,9 +149,33 @@ export const CartUI = () => {
               <Trash2 size={20} />
               Borrar cotizaciones
             </ButtonCartSecondary>
+            <p className='mt-5 text-sm text-gray-600'>
+              {`Al hacer click en "Cotizar productos" se abrirá una ventana de
+              correo electrónico con los productos seleccionados. Asegúrate de
+              tener configurado tu cliente de correo electrónico predeterminado
+              o selecciona uno manualmente.`}
+            </p>
           </>
-        )}
-      </div>
+        </div>
+      )}
+      <p className='mt-5 mx-auto text-sm text-gray-600'>
+        Ante cualquier duda o consulta, no dudes en contactarnos a través de
+        nuestro{' '}
+        <Link
+          href='/contacto'
+          className='text-green-600 underline underline-offset-2'
+        >
+          formulario de contacto
+        </Link>{' '}
+        o a través de nuestro{' '}
+        <Link
+          href='tel:+56934501342'
+          className='text-green-600 underline underline-offset-2'
+        >
+          contacto telefónico
+        </Link>
+        .
+      </p>
     </section>
   )
 }
