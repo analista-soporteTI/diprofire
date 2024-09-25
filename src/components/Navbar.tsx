@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 export const Navbar = () => {
-  const { getLength } = useCartStore()
+  const { getCart, getLength } = useCartStore()
 
   const [scrolling, setScrolling] = useState(false)
   const [counterCart, setCounterCart] = useState(getLength())
@@ -37,6 +37,11 @@ export const Navbar = () => {
   }, [])
 
   useEffect(() => {
+    getCart()
+    setCounterCart(getLength())
+  }, [getCart, getLength])
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setCounterCart(getLength())
     }, 1000)
@@ -44,7 +49,7 @@ export const Navbar = () => {
     return () => {
       clearInterval(interval)
     }
-  }, [counterCart, getLength])
+  }, [getLength])
 
   const msgCart =
     counterCart > 1 || counterCart === 0 ? 'cotizaciones' : 'cotización'
