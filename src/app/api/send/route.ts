@@ -17,7 +17,7 @@ export async function POST (request: Request) {
 
     const { data, error } = await resend.emails.send({
       from: 'Diprofire Web <diprofire@diprofire.cl>',
-      to: ['expeditor.diprofire@gmail.com'],
+      to: ['ventas@diprofire.cl'],
       subject: `Cotización web de ${subject}`,
       react: EmailProductsTemplate(dataResend),
       headers: {

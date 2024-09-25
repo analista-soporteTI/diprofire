@@ -21,7 +21,7 @@ export async function POST (request: Request) {
 
     await resend.emails.send({
       from: 'Diprofire Web <diprofire@diprofire.cl>',
-      to: ['expeditor.diprofire@gmail.com'],
+      to: ['ventas@diprofire.cl'],
       subject: subject,
       react: EmailContactTemplate({ contact: data }),
       headers: {
