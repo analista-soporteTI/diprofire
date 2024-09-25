@@ -1,17 +1,17 @@
 'use client'
 import { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
-import emailjs from '@emailjs/browser'
-import { StatusMessage } from '@components/status/StatusMessage'
 import { STATUS } from '@consts/status.js'
-
-const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? ''
-const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? ''
-const secretKey = process.env.SECRET_EMAILJS_KEY ?? ''
+import { Toast } from '@components/Toast'
+import { Loader, Send } from 'lucide-react'
+import { validationContact } from '@/hooks/validation'
 
 export const ContactForm = () => {
-  const [statusMessage, setStatusMessage] = useState<{ type: string, text: string } | null>(null)
+  const [statusMessage, setStatusMessage] = useState<{
+    type: string
+    text: string
+  } | null>(null)
+  const [showToast, setShowToast] = useState(false)
 
   const initialValues = {
     email: '',
@@ -22,177 +22,170 @@ export const ContactForm = () => {
     message: ''
   }
 
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email('Formato de email inválido')
-      .required('Requerido'),
-    name: Yup.string().required('Requerido'),
-    phone: Yup.string().required('Requerido'),
-    company: Yup.string().required('Requerido'),
-    subject: Yup.string().required('Requerido'),
-    message: Yup.string().required('Requerido')
-  })
+  const onSubmit = async (values: any, { setSubmitting, resetForm }: any) => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+      })
 
-  const onSubmit = (values: any, { setSubmitting, resetForm }: any) => {
-    const templateParams = {
-      from_name: values.name,
-      from_email: values.email,
-      phone: values.phone,
-      company: values.company,
-      subject: values.subject,
-      message_html: values.message
-    }
-
-    emailjs
-      .send(serviceId, templateId, templateParams, secretKey)
-      .then(() => {
+      if (response.ok) {
         setStatusMessage({
           type: STATUS.SUCCESS,
           text: '¡Nos llegó tu mensaje, gracias!'
         })
-        setSubmitting(false)
         resetForm()
+      } else {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Error al enviar el mensaje')
+      }
+    } catch (error: any) {
+      console.error('Error al enviar el mensaje:', error.message)
+      setStatusMessage({
+        type: STATUS.ERROR,
+        text: 'Error al enviar el mensaje'
       })
-      .catch((error: any) => {
-        console.error('Error al enviar el correo:', error)
-        setStatusMessage({
-          type: STATUS.ERROR,
-          text: 'Error al enviar el mensaje'
-        })
-        setSubmitting(false)
-      })
+    } finally {
+      setShowToast(true)
+      setSubmitting(false)
+    }
   }
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {({ isSubmitting }: any) => (
-        <Form className='w-full max-w-2xl mx-auto'>
-          <div className='mb-4'>
-            <label htmlFor='email' className='block text-gray-700'>
-              Email
-            </label>
-            <Field
-              type='email'
-              id='email'
-              name='email'
-              className='mt-2 block w-full p-2 border border-gray-300 rounded'
-            />
-            <ErrorMessage
-              name='email'
-              component='div'
-              className='text-red-500 mt-1'
-            />
-          </div>
-
-          <div className='grid grid-cols-2 gap-4 mb-4'>
-            <div>
-              <label htmlFor='name' className='block text-gray-700'>
+    <>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationContact}
+        onSubmit={onSubmit}
+      >
+        {({ isSubmitting }: any) => (
+          <Form className='w-full max-w-2xl mx-auto'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4'>
+              <label className='block text-gray-700 mb-4'>
+                Email
+                <Field
+                  type='email'
+                  id='email'
+                  name='email'
+                  className='mt-2 block w-full p-2 border border-gray-300 rounded'
+                />
+                <ErrorMessage
+                  name='email'
+                  component='div'
+                  className='text-red-500 mt-1'
+                />
+              </label>
+              <label className='block text-gray-700'>
                 Nombre y Apellido
+                <Field
+                  type='text'
+                  id='name'
+                  name='name'
+                  className='mt-2 block w-full p-2 border border-gray-300 rounded'
+                />
+                <ErrorMessage
+                  name='name'
+                  component='div'
+                  className='text-red-500 mt-1'
+                />
               </label>
-              <Field
-                type='text'
-                id='name'
-                name='name'
-                className='mt-2 block w-full p-2 border border-gray-300 rounded'
-              />
-              <ErrorMessage
-                name='name'
-                component='div'
-                className='text-red-500 mt-1'
-              />
-            </div>
-            <div>
-              <label htmlFor='phone' className='block text-gray-700'>
-                Número de Teléfono
+              <label className='block text-gray-700'>
+                Número de Teléfono{' '}
+                <span className='opacity-70'>(opcional)</span>
+                <Field
+                  type='text'
+                  id='phone'
+                  name='phone'
+                  className='mt-2 block w-full p-2 border border-gray-300 rounded'
+                />
+                <ErrorMessage
+                  name='phone'
+                  component='div'
+                  className='text-red-500 mt-1'
+                />
               </label>
-              <Field
-                type='text'
-                id='phone'
-                name='phone'
-                className='mt-2 block w-full p-2 border border-gray-300 rounded'
-              />
-              <ErrorMessage
-                name='phone'
-                component='div'
-                className='text-red-500 mt-1'
-              />
+              <label className='block text-gray-700 mb-4'>
+                Empresa{' '}
+                <span className='opacity-70'>(opcional)</span>
+                <Field
+                  type='text'
+                  id='company'
+                  name='company'
+                  className='mt-2 block w-full p-2 border border-gray-300 rounded'
+                />
+                <ErrorMessage
+                  name='company'
+                  component='div'
+                  className='text-red-500 mt-1'
+                />
+              </label>
             </div>
-          </div>
 
-          <div className='mb-4'>
-            <label htmlFor='company' className='block text-gray-700'>
-              Empresa
-            </label>
-            <Field
-              type='text'
-              id='company'
-              name='company'
-              className='mt-2 block w-full p-2 border border-gray-300 rounded'
-            />
-            <ErrorMessage
-              name='company'
-              component='div'
-              className='text-red-500 mt-1'
-            />
-          </div>
-
-          <div className='mb-4'>
-            <label htmlFor='subject' className='block text-gray-700'>
+            <label className='block text-gray-700 mb-4'>
               Asunto
+              <Field
+                type='text'
+                id='subject'
+                name='subject'
+                className='mt-2 block w-full p-2 border border-gray-300 rounded'
+              />
+              <ErrorMessage
+                name='subject'
+                component='div'
+                className='text-red-500 mt-1'
+              />
             </label>
-            <Field
-              type='text'
-              id='subject'
-              name='subject'
-              className='mt-2 block w-full p-2 border border-gray-300 rounded'
-            />
-            <ErrorMessage
-              name='subject'
-              component='div'
-              className='text-red-500 mt-1'
-            />
-          </div>
 
-          <div className='mb-4'>
-            <label htmlFor='message' className='block text-gray-700'>
+            <label className='block text-gray-700 mb-4'>
               Mensaje
+              <Field
+                as='textarea'
+                id='message'
+                name='message'
+                rows='5'
+                className='mt-2 block w-full p-2 border border-gray-300 rounded min-h-[75px] max-h-[300px]'
+              />
+              <ErrorMessage
+                name='message'
+                component='div'
+                className='text-red-500 mt-1'
+              />
             </label>
-            <Field
-              as='textarea'
-              id='message'
-              name='message'
-              rows='5'
-              className='mt-2 block w-full p-2 border border-gray-300 rounded max-h-[300px]'
-            />
-            <ErrorMessage
-              name='message'
-              component='div'
-              className='text-red-500 mt-1'
-            />
-          </div>
 
-          <div className='text-center'>
-            <button
-              type='submit'
-              className='bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700'
-              disabled={isSubmitting}
-            >
-              Enviar mensaje
-            </button>
-          </div>
-          {statusMessage && (
-            <StatusMessage
-              message={statusMessage.text}
-              type={statusMessage.type}
-              className='w-fit mx-auto mt-4'
-            />
-          )}
-        </Form>
+            <div className='text-center'>
+              <button
+                type='submit'
+                className='flex gap-2 items-center bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700'
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader size={20} className='animate-spin' />
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    <Send size={20} />
+                    Enviar mensaje
+                  </>
+                )}
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+
+      {statusMessage && (
+        <Toast
+          message={statusMessage.text}
+          type={statusMessage.type}
+          show={showToast}
+          onClose={() => setShowToast(false)}
+        />
       )}
-    </Formik>
+    </>
   )
 }
