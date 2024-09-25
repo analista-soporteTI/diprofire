@@ -29,9 +29,13 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
 
-      - name: Run tests
+      - name: Run Jest tests
         run: npm test
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
 
   deploy:
     runs-on: ubuntu-latest
