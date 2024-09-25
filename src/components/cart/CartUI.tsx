@@ -10,7 +10,8 @@ import notFoundImg from '@assets/products/not found.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ButtonMail } from '@components/buttons/ButtonMail'
-import { Mail, Trash2, X } from 'lucide-react'
+import { CircleAlert, Trash2, X } from 'lucide-react'
+import { validationProducts } from '@/hooks/validation'
 
 export const CartUI = () => {
   const {
@@ -23,6 +24,10 @@ export const CartUI = () => {
     getLength
   } = useCartStore()
   const [lengthCart, setLengthCart] = useState(getLength())
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+  const [errors, setErrors] = useState<{ email?: string; phone?: string }>({})
 
   useEffect(() => {
     getCart()
@@ -31,6 +36,23 @@ export const CartUI = () => {
   useEffect(() => {
     setLengthCart(getLength())
   }, [cart, getLength])
+
+  useEffect(() => {
+    validationProducts
+      .validate({ email, phone }, { abortEarly: false })
+      .then(() => {
+        setIsButtonDisabled(false)
+        setErrors({})
+      })
+      .catch(err => {
+        setIsButtonDisabled(true)
+        const errorMessages = err.inner.reduce(
+          (acc: any, curr: any) => ({ ...acc, [curr.path]: curr.message }),
+          {}
+        )
+        setErrors(errorMessages)
+      })
+  }, [email, phone])
 
   const handleAddToCart = (product: any) => {
     addOneToCart(product)
@@ -43,6 +65,14 @@ export const CartUI = () => {
   }
   const handleUpdateQuantity = (productId: any, quantity: any) => {
     updateQuantity(productId, quantity)
+  }
+
+  const data = {
+    contact: {
+      email,
+      phone
+    },
+    products: cart
   }
 
   return (
@@ -96,7 +126,7 @@ export const CartUI = () => {
                     ) : (
                       <Image
                         src={notFoundImg.src}
-                        alt={`Imagen de producto sin previsualización`}
+                        alt='Imagen de producto sin previsualización'
                         width={80}
                         height={80}
                         loading='lazy'
@@ -108,12 +138,18 @@ export const CartUI = () => {
                     <p className='w-fit block text-sm font-semibold md:max-w-[60ch]'>
                       {item.name}
                     </p>
-                    <p className='w-fit block text-sm text-zinc-600'>{`SKU: ${item.sku}`}</p>
+                    <p className='w-fit block text-sm text-zinc-600'>
+                      {`SKU: ${item.sku}`}
+                    </p>
                     {item.model && (
-                      <p className='w-fit block text-sm text-zinc-600'>{`Modelo: ${item.model}`}</p>
+                      <p className='w-fit block text-sm text-zinc-600'>
+                        {`Modelo: ${item.model}`}
+                      </p>
                     )}
                     {item.brand && (
-                      <p className='w-fit block text-sm text-zinc-600'>{`Marca: ${item.brand}`}</p>
+                      <p className='w-fit block text-sm text-zinc-600'>
+                        {`Marca: ${item.brand}`}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -135,42 +171,74 @@ export const CartUI = () => {
         </div>
       )}
       {lengthCart > 0 && (
-        <div className='flex flex-wrap justify-between gap-4 mt-8 mx-auto'>
-          <>
-            <ButtonMail cart={cart}>
-              <Mail size={20} />
-              Cotizar productos
-            </ButtonMail>
-            <ButtonCartSecondary
-              disabled={lengthCart === 0}
-              onClick={() => handleClearCart()}
-              className='mt-auto mb-0 flex gap-1.5 items-center text-red-600 border-0 hover:text-red-700 hover:bg-red-600/20'
-            >
-              <Trash2 size={20} />
-              Borrar cotizaciones
-            </ButtonCartSecondary>
-            <p className='mt-5 text-sm text-gray-600'>
-              {`Al hacer click en "Cotizar productos" se abrirá una ventana de
-              correo electrónico con los productos seleccionados. Asegúrate de
-              tener configurado tu cliente de correo electrónico predeterminado
-              o selecciona uno manualmente.`}
-            </p>
-          </>
-        </div>
+        <>
+          <p className='flex gap-1 items-start my-5 text-sm text-gray-600'>
+            <CircleAlert size={20} color='orange' />
+            <span>
+              Completa los campos para recibir tu cotización por correo
+              electrónico. Nada de spam, lo prometemos.
+            </span>
+          </p>
+          <div className='w-full flex flex-wrap gap-4 justify-between'>
+            <div className='mb-4 flex flex-wrap gap-2'>
+              <label>
+                <input
+                  id='cart_mail'
+                  type='email'
+                  name='email'
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder='Correo electrónico'
+                  className='border rounded-sm px-4 py-2 w-[240px]'
+                />
+                {errors.email && (
+                  <p className='text-red-600 text-sm'>{errors.email}</p>
+                )}
+              </label>
+              <label>
+                <input
+                  id='cart_tel'
+                  type='tel'
+                  name='phone'
+                  value={phone}
+                  onChange={e => setPhone(e.target.value)}
+                  placeholder='Número de teléfono'
+                  className='border rounded-sm px-4 py-2 w-[240px]'
+                />
+                {errors.phone && (
+                  <p className='text-red-600 text-sm'>{errors.phone}</p>
+                )}
+              </label>
+            </div>
+            <div className='flex flex-wrap gap-2'>
+              <ButtonMail data={data} disabled={isButtonDisabled}>
+                Cotizar productos
+              </ButtonMail>
+              <ButtonCartSecondary
+                disabled={lengthCart === 0}
+                onClick={() => handleClearCart()}
+                className='mt-0 flex gap-1.5 items-center text-red-600 border-0 hover:text-red-700 hover:bg-red-600/20'
+              >
+                <Trash2 size={20} />
+                Borrar cotizaciones
+              </ButtonCartSecondary>
+            </div>
+          </div>
+        </>
       )}
       <p className='mt-5 mx-auto text-sm text-gray-600'>
         Ante cualquier duda o consulta, no dudes en contactarnos a través de
         nuestro{' '}
         <Link
           href='/contacto'
-          className='text-green-600 underline underline-offset-2'
+          className='text-green-600 underline underline-offset-2 hover:text-green-700'
         >
           formulario de contacto
         </Link>{' '}
         o a través de nuestro{' '}
         <Link
           href='tel:+56934501342'
-          className='text-green-600 underline underline-offset-2'
+          className='text-green-600 underline underline-offset-2 hover:text-green-700'
         >
           contacto telefónico
         </Link>
