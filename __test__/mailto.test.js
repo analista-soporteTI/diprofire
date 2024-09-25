@@ -5,8 +5,9 @@ describe('sendEmail', () => {
   const mockData = {
     data: {
       contact: {
+        name: 'John Doe',
         email: 'example@example.com',
-        phone: '123456789'
+        enterprise: 'Enterprise',
       },
       products: [{ name: 'Producto 1' }]
     }
@@ -15,7 +16,8 @@ describe('sendEmail', () => {
   const incompleteData = {
     data: {
       contact: {
-        phone: '123456789'
+        name: 'John Doe',
+        enterprise: 'Enterprise',
       }
     }
   }
