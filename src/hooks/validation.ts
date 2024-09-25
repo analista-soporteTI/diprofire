@@ -1,18 +1,12 @@
 import * as yup from 'yup'
 
 export const validationProducts = yup.object().shape({
+  name: yup.string().required('¿Con quién tenemos el gusto de hablar?'),
   email: yup
     .string()
     .email('Correo electrónico no válido')
     .required('Sin tu email no podemos contactarte'),
-  phone: yup
-    .string()
-    .required('El número de teléfono es obligatorio')
-    .matches(
-      /^[0-9]+$/,
-      'El teléfono solo puede contener números (sin espacios)'
-    )
-    .min(8, 'El teléfono debe tener al menos 8 dígitos')
+  enterprise: yup.string()
 })
 
 export const validationContact = yup.object({

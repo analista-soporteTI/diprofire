@@ -1,8 +1,9 @@
 interface EmailProps {
   data: {
     contact: {
+      name: string
       email: string
-      phone: string
+      enterprise: string
     }
     products: any[]
   }

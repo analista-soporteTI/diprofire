@@ -1,7 +1,8 @@
 interface EmailProductsTemplateProps {
   contact: {
+    name: string
     email: string
-    phone: string
+    enterprise: string
   }
   products: any[]
 }
@@ -13,17 +14,24 @@ export const EmailProductsTemplate = ({
   return (
     <>
       <h1>Solicitud de cotización web</h1>
+      {contact.name && (
+        <p>
+          <strong>Nombre: </strong>
+          {contact.name}
+          <br />
+        </p>
+      )}
       {contact.email && (
         <p>
-          <strong>Correo: </strong>
+          <strong>Email: </strong>
           {contact.email}
           <br />
         </p>
       )}
-      {contact.phone && (
+      {contact.enterprise && (
         <p>
-          <strong>Teléfono: </strong>
-          {contact.phone}
+          <strong>Empresa: </strong>
+          {contact.enterprise}
           <br />
         </p>
       )}

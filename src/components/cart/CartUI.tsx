@@ -24,10 +24,15 @@ export const CartUI = () => {
     getLength
   } = useCartStore()
   const [lengthCart, setLengthCart] = useState(getLength())
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
+  const [enterprise, setEnterprise] = useState('')
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-  const [errors, setErrors] = useState<{ email?: string; phone?: string }>({})
+  const [errors, setErrors] = useState<{
+    name?: string
+    email?: string
+    enterprise?: string
+  }>({})
 
   useEffect(() => {
     getCart()
@@ -39,7 +44,7 @@ export const CartUI = () => {
 
   useEffect(() => {
     validationProducts
-      .validate({ email, phone }, { abortEarly: false })
+      .validate({ name, email, enterprise }, { abortEarly: false })
       .then(() => {
         setIsButtonDisabled(false)
         setErrors({})
@@ -52,7 +57,7 @@ export const CartUI = () => {
         )
         setErrors(errorMessages)
       })
-  }, [email, phone])
+  }, [name, email, enterprise])
 
   const handleAddToCart = (product: any) => {
     addOneToCart(product)
@@ -69,8 +74,9 @@ export const CartUI = () => {
 
   const data = {
     contact: {
+      name,
       email,
-      phone
+      enterprise
     },
     products: cart
   }
@@ -183,13 +189,27 @@ export const CartUI = () => {
             <div className='mb-4 flex flex-wrap gap-2'>
               <label>
                 <input
-                  id='cart_mail'
+                  id='cart_name'
+                  type='text'
+                  name='name'
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  placeholder='Nombre y apellido'
+                  className='border rounded-sm px-4 py-2 w-[260px]'
+                />
+                {errors.name && (
+                  <p className='text-red-600 text-sm'>{errors.name}</p>
+                )}
+              </label>
+              <label>
+                <input
+                  id='cart_email'
                   type='email'
                   name='email'
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   placeholder='Correo electrónico'
-                  className='border rounded-sm px-4 py-2 w-[240px]'
+                  className='border rounded-sm px-4 py-2 w-[260px]'
                 />
                 {errors.email && (
                   <p className='text-red-600 text-sm'>{errors.email}</p>
@@ -197,16 +217,16 @@ export const CartUI = () => {
               </label>
               <label>
                 <input
-                  id='cart_tel'
+                  id='cart_enterprise'
                   type='tel'
-                  name='phone'
-                  value={phone}
-                  onChange={e => setPhone(e.target.value)}
-                  placeholder='Número de teléfono'
-                  className='border rounded-sm px-4 py-2 w-[240px]'
+                  name='enterprise'
+                  value={enterprise}
+                  onChange={e => setEnterprise(e.target.value)}
+                  placeholder='Empresa (opcional)'
+                  className='border rounded-sm px-4 py-2 w-[260px]'
                 />
-                {errors.phone && (
-                  <p className='text-red-600 text-sm'>{errors.phone}</p>
+                {errors.enterprise && (
+                  <p className='text-red-600 text-sm'>{errors.enterprise}</p>
                 )}
               </label>
             </div>
