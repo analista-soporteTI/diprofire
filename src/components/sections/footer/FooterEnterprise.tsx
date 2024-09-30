@@ -26,12 +26,12 @@ export const FooterEnterprise = () => {
           </p>
           <p className='max-w-[60ch]'>
             Nos especializamos en normativa contra incendios y contamos con la
-            certificación de fábrica de KIDDE FIRE SYSTEMS.
+            certificación de fábrica de Kidde Fire Systems.
           </p>
           <ul className='pt-4 flex justify-start gap-6 sm:mt-0'>
             <li>
               <a
-                href='/'
+                href='https://x.com/diprofire?lang=es'
                 rel='noreferrer'
                 target='_blank'
                 className='text-gray-700 transition hover:opacity-75'
@@ -43,7 +43,7 @@ export const FooterEnterprise = () => {
             </li>
             <li>
               <a
-                href='/'
+                href='https://www.linkedin.com/in/diprofire-chile-ltda-452a49191/'
                 rel='noreferrer'
                 target='_blank'
                 className='text-gray-700 transition hover:opacity-75'
@@ -98,5 +98,3 @@ export const FooterEnterprise = () => {
     </div>
   )
 }
-
-;<style scoped></style>
