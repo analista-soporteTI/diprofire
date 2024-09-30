@@ -1,8 +1,8 @@
 import Image from "next/image";
 import '@styles/group-clients.css'
 import abb from "@assets/clients/abb.svg"
-import aes from "@assets/clients/aes gener.jpg"
-import bhp from "@assets/clients/bhp billiton.jpg"
+import aes from "@assets/clients/aes gener.png"
+import bhp from "@assets/clients/bhp billiton.png"
 import centinela from "@assets/clients/centinela minerals.svg"
 import codelco from "@assets/clients/codelco.svg"
 import collahuasi from "@assets/clients/collahuasi.png"
